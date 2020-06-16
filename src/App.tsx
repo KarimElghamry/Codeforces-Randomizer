@@ -6,6 +6,7 @@ import Topics from './components/topics/Topics';
 const App: React.FC<{}> = (): ReactElement => {
   const content: string = 'emiwnewienmwe';
   const [visible, setVisible] = useState<boolean>(true);
+  const [selectedTopics, setSelectedTopics] = useState<Array<string>>([]);
   return (
     <div
       style={{
@@ -17,7 +18,10 @@ const App: React.FC<{}> = (): ReactElement => {
     >
       <Header></Header>
       <button onClick={() => setVisible(true)}>CLICK</button>
-      <Topics>s;dls;dl</Topics>
+      <Topics
+        selectedTopics={selectedTopics}
+        setSelectedTopics={setSelectedTopics}
+      ></Topics>
       <Snackbar
         type="error"
         content={content}

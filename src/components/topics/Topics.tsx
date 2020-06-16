@@ -3,6 +3,11 @@ import styled from 'styled-components';
 import Tag from './Tag';
 import {getTags} from '../../services/data';
 
+interface Props {
+  selectedTopics: Array<string>;
+  setSelectedTopics: Function;
+}
+
 const Container = styled.div`
   width: 500px;
   border: lightgray solid 1px;
@@ -14,11 +19,11 @@ const Container = styled.div`
 
 const tags: Array<string> = getTags();
 
-const Topics: React.FC = (): ReactElement => {
+const Topics: React.FC<Props> = (props: Props): ReactElement => {
   return (
     <Container>
       {tags.map((val: string) => (
-        <Tag selected={false} content={val}></Tag>
+        <Tag selected={true} content={val}></Tag>
       ))}
     </Container>
   );

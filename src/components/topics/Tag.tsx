@@ -23,6 +23,7 @@ const StyledTag = styled.div<StyledProps>`
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  transition-duration: 0.3s;
 `;
 
 const Tag: React.FC<Props> = (props: Props): ReactElement => {
