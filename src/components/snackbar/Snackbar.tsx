@@ -1,4 +1,4 @@
-import React, {ReactElement} from 'react';
+import React, {ReactElement, useEffect} from 'react';
 import styled from 'styled-components';
 import CancelButton from './CancelButton';
 
@@ -7,6 +7,7 @@ interface SnackbarProps {
   type?: string;
   content: string;
   onCancel: Function;
+  timeout: number;
 }
 
 const StyledSnackbar = styled.div<SnackbarProps>`
@@ -34,6 +35,17 @@ const StyledSnackbar = styled.div<SnackbarProps>`
 const Snackbar: React.FC<SnackbarProps> = (
   props: SnackbarProps
 ): ReactElement => {
+  const onCancel: Function = props.onCancel;
+  const visible: boolean = props.visible;
+  const timeout: number = props.timeout;
+
+  useEffect(() => {
+    if (visible) {
+      const makeInvisible = setTimeout(() => onCancel(), timeout);
+      return () => clearTimeout(makeInvisible);
+    }
+  }, [visible, onCancel, timeout]);
+
   return (
     <StyledSnackbar {...props}>
       <div
@@ -47,7 +59,7 @@ const Snackbar: React.FC<SnackbarProps> = (
       >
         {props.content}
       </div>
-      <CancelButton onClick={props.onCancel}></CancelButton>
+      <CancelButton onClick={onCancel}></CancelButton>
     </StyledSnackbar>
   );
 };
