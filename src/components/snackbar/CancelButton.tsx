@@ -1,6 +1,10 @@
 import React, {ReactElement} from 'react';
 
-const CancelButton: React.FC = (): ReactElement => {
+interface Props {
+  onClick: Function;
+}
+
+const CancelButton: React.FC<Props> = (props: Props): ReactElement => {
   return <div></div>;
 };
 
