@@ -6,14 +6,16 @@ interface SnackbarProps {
   visible: boolean;
   type?: string;
   content: string;
+  onCancel: Function;
 }
 
 const StyledSnackbar = styled.div<SnackbarProps>`
   background-color: ${(props) => (props.type === 'error' ? 'red' : 'green')};
   color: white;
-  opacity: 0.8;
+  opacity: ${(props) => (props.visible ? '0.8' : '0')};
+  visibility: ${(props) => (props.visible ? 'none' : 'hidden')};
   position: absolute;
-  bottom: 20px;
+  bottom: ${(props) => (props.visible ? '20px' : '-100px')};
   left: 0;
   right: 0;
   margin: auto;
@@ -26,6 +28,7 @@ const StyledSnackbar = styled.div<SnackbarProps>`
   justify-content: space-between;
   align-items: center;
   user-select: none;
+  transition-duration: 0.5s;
 `;
 
 const Snackbar: React.FC<SnackbarProps> = (
@@ -44,7 +47,7 @@ const Snackbar: React.FC<SnackbarProps> = (
       >
         {props.content}
       </div>
-      <CancelButton onClick={() => console.log('clicked')}></CancelButton>
+      <CancelButton onClick={props.onCancel}></CancelButton>
     </StyledSnackbar>
   );
 };

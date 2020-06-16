@@ -1,11 +1,19 @@
-import React, {ReactElement} from 'react';
+import React, {ReactElement, useState} from 'react';
 import Snackbar from './components/snackbar/Snackbar';
 
 const App: React.FC<{}> = (): ReactElement => {
-  const errorContent: string = 'eminem is the eaaheiraaaaaaaaaSAjjwer';
+  const errorContent: string = 'Maximum 4 selected Components';
+  const [visible, setVisible] = useState<boolean>(true);
+
   return (
     <div>
-      <Snackbar type="error" content={errorContent} visible={true}></Snackbar>
+      <button onClick={() => setVisible((prev) => !prev)}>CLICK</button>
+      <Snackbar
+        type="error"
+        content={errorContent}
+        visible={visible}
+        onCancel={() => setVisible(false)}
+      ></Snackbar>
     </div>
   );
 };
