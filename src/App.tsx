@@ -4,12 +4,14 @@ import Header from './components/header/Header';
 import Topics from './components/topics/Topics';
 
 const App: React.FC<{}> = (): ReactElement => {
-  const content: string = 'emiwnewienmwe';
-  const [visible, setVisible] = useState<boolean>(true);
-  const [selectedTopics, setSelectedTopics] = useState<Array<string>>([
-    'dp',
-    'graphs',
-  ]);
+  const [errContent, setErrContent] = useState<string>('');
+  const [visible, setVisible] = useState<boolean>(false);
+  const [selectedTopics, setSelectedTopics] = useState<Array<string>>([]);
+  const triggerError: (content: string) => void = (content: string) => {
+    setErrContent(content);
+    setVisible(true);
+  };
+
   return (
     <div
       style={{
@@ -24,10 +26,11 @@ const App: React.FC<{}> = (): ReactElement => {
       <Topics
         selectedTopics={selectedTopics}
         setSelectedTopics={setSelectedTopics}
+        triggerError={triggerError}
       ></Topics>
       <Snackbar
         type="error"
-        content={content}
+        content={errContent}
         visible={visible}
         timeout={2000}
         onCancel={() => setVisible(false)}

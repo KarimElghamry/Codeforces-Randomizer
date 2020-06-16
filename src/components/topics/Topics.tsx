@@ -6,6 +6,7 @@ import {getTags} from '../../services/data';
 interface Props {
   selectedTopics: Array<string>;
   setSelectedTopics: Function;
+  triggerError: (content: string) => void;
 }
 
 const Container = styled.div`
@@ -26,6 +27,10 @@ const Topics: React.FC<Props> = (props: Props): ReactElement => {
     if (selected) {
       newSelectedTopics = selectedTopics.filter((val: string) => val !== topic);
     } else {
+      if (selectedTopics.length >= 4) {
+        props.triggerError('Maximum of 4 selected topics');
+        return;
+      }
       newSelectedTopics = selectedTopics.concat(topic);
     }
 
