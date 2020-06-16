@@ -25,6 +25,7 @@ const StyledSnackbar = styled.div<SnackbarProps>`
   width: 300px;
   height: 55px;
   border-radius: 30px;
+  font-weight: 600;
   display: flex;
   justify-content: space-between;
   align-items: center;
