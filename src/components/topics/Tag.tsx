@@ -3,13 +3,19 @@ import styled from 'styled-components';
 
 interface Props {
   selected: boolean;
+  content: string;
 }
 
-const StyledTag = styled.div<Props>`
+interface StyledProps {
+  selected: boolean;
+}
+
+const StyledTag = styled.div<StyledProps>`
   background-color: ${(props) => (props.selected ? '#33AC71' : '#00bcd4')};
   border-radius: 2px;
   color: white;
-  min-width: 80px;
+  font-weight: 700;
+  min-width: 70px;
   min-height: 30px;
   margin: 5px;
   user-select: none;
@@ -22,7 +28,7 @@ const StyledTag = styled.div<Props>`
 const Tag: React.FC<Props> = (props: Props): ReactElement => {
   return (
     <StyledTag selected={props.selected}>
-      <div style={{margin: '5px'}}>binahjghjgry eotio</div>
+      <div style={{margin: '5px'}}>{props.content}</div>
     </StyledTag>
   );
 };
