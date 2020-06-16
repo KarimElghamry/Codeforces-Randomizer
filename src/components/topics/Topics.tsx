@@ -20,11 +20,31 @@ const Container = styled.div`
 const tags: Array<string> = getTags();
 
 const Topics: React.FC<Props> = (props: Props): ReactElement => {
+  const selectedTopics: Array<string> = props.selectedTopics;
+  const handleTopicAddition = (selected: boolean, topic: string) => {
+    let newSelectedTopics: Array<string>;
+    if (selected) {
+      newSelectedTopics = selectedTopics.filter((val: string) => val !== topic);
+    } else {
+      newSelectedTopics = selectedTopics.concat(topic);
+    }
+
+    props.setSelectedTopics(newSelectedTopics);
+  };
+
   return (
     <Container>
-      {tags.map((val: string) => (
-        <Tag selected={true} content={val}></Tag>
-      ))}
+      {tags.map((val: string) => {
+        const selected: boolean = selectedTopics.includes(val);
+        return (
+          <Tag
+            key={val}
+            selected={selected}
+            content={val}
+            onClick={handleTopicAddition}
+          ></Tag>
+        );
+      })}
     </Container>
   );
 };

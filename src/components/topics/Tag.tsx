@@ -4,6 +4,7 @@ import styled from 'styled-components';
 interface Props {
   selected: boolean;
   content: string;
+  onClick: (selected: boolean, topic: string) => void;
 }
 
 interface StyledProps {
@@ -27,8 +28,14 @@ const StyledTag = styled.div<StyledProps>`
 `;
 
 const Tag: React.FC<Props> = (props: Props): ReactElement => {
+  const selected: boolean = props.selected;
+  const content: string = props.content;
+
   return (
-    <StyledTag selected={props.selected}>
+    <StyledTag
+      selected={props.selected}
+      onClick={() => props.onClick(selected, content)}
+    >
       <div style={{margin: '5px'}}>{props.content}</div>
     </StyledTag>
   );

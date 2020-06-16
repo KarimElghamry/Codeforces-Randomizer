@@ -6,7 +6,10 @@ import Topics from './components/topics/Topics';
 const App: React.FC<{}> = (): ReactElement => {
   const content: string = 'emiwnewienmwe';
   const [visible, setVisible] = useState<boolean>(true);
-  const [selectedTopics, setSelectedTopics] = useState<Array<string>>([]);
+  const [selectedTopics, setSelectedTopics] = useState<Array<string>>([
+    'dp',
+    'graphs',
+  ]);
   return (
     <div
       style={{
