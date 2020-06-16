@@ -7,24 +7,31 @@ interface SnackbarProps {
   content: string;
 }
 
-const Wrapper: React.FC<SnackbarProps> = (
-  props: SnackbarProps
-): ReactElement => {
-  return <div>{props.content}</div>;
-};
-
-Wrapper.defaultProps = {
-  type: 'error',
-};
-
-const Snackbar = styled(Wrapper)`
+const StyledSnackbar = styled.div<SnackbarProps>`
   background-color: ${(props) => (props.type === 'error' ? 'red' : 'green')};
-  opacity: 0.7;
+  color: white;
+  opacity: 0.8;
   position: absolute;
   bottom: 20px;
-  min-width: 100px;
-  min-height: 55px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 300px;
+  height: 55px;
   border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
+
+const Snackbar: React.FC<SnackbarProps> = (
+  props: SnackbarProps
+): ReactElement => {
+  return <StyledSnackbar {...props}>{props.content}</StyledSnackbar>;
+};
+
+Snackbar.defaultProps = {
+  type: 'error',
+};
 
 export default Snackbar;

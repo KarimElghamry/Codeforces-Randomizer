@@ -1,7 +1,13 @@
 import React, {ReactElement} from 'react';
+import Snackbar from './components/snackbar/Snackbar';
 
 const App: React.FC<{}> = (): ReactElement => {
-  return <div>REACT TS</div>;
+  const errorContent: string = 'eminem';
+  return (
+    <div>
+      <Snackbar type="error" content={errorContent} visible={true}></Snackbar>
+    </div>
+  );
 };
 
 export default App;
