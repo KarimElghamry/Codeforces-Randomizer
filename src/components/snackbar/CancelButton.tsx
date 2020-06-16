@@ -7,12 +7,14 @@ interface Props {
 
 const StyleCancelButton = styled.div`
   background-color: white;
+  margin-left: 5px;
   width: 20px;
   height: 20px;
   border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 
 const CancelButton: React.FC<Props> = (props: Props): ReactElement => {
