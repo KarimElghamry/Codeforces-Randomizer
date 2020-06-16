@@ -22,7 +22,7 @@ const App: React.FC<{}> = (): ReactElement => {
       }}
     >
       <Header></Header>
-      <button onClick={() => setVisible(true)}>CLICK</button>
+      <button onClick={() => triggerError('test error')}>CLICK</button>
       <Topics
         selectedTopics={selectedTopics}
         setSelectedTopics={setSelectedTopics}
