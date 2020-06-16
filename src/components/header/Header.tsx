@@ -10,8 +10,13 @@ const CenteredDiv = styled.div`
 
 const Header: React.FC = (): ReactElement => {
   return (
-    <div>
-      <img width={300} src={assets.images.codeforcesLogo} alt=""></img>
+    <div style={{margin: '20px'}}>
+      <img
+        width={300}
+        height={35}
+        src={assets.images.codeforcesLogo}
+        alt=""
+      ></img>
       <CenteredDiv>Randomizer</CenteredDiv>
     </div>
   );
