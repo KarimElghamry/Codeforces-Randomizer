@@ -20,6 +20,13 @@ const StyledProblemCard = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  border-radius: 10px;
+  cursor: pointer;
+  transition-duration: 0.3s;
+
+  &:hover {
+    background-color: lightgray;
+  }
 `;
 
 const Cell = styled.div<CellProps>`
@@ -36,7 +43,7 @@ const ProblemCard: React.FC<CardProps> = (props: CardProps): ReactElement => {
   return (
     <StyledProblemCard>
       <Cell flex={1}>{`${problemStats.contestId}${problemStats.index}`}</Cell>
-      <Cell flex={2}>{`${problem.name}`}</Cell>
+      <Cell flex={3}>{`${problem.name}`}</Cell>
       <Cell flex={1}>{`${problem.rating}`}</Cell>
       <Cell flex={1}>{`x${problemStats.solvedCount}`}</Cell>
     </StyledProblemCard>
