@@ -2,6 +2,13 @@ import React, {ReactElement} from 'react';
 import ProblemCard from './ProblemCard';
 import {ProblemStatistics} from '../../models/ProblemStatistics';
 import {Problem} from '../../models/Problem';
+import styled from 'styled-components';
+
+const StyleProblemsSection = styled.div`
+  margin-top: 20px;
+  max-height: 300px;
+  overflow-y: scroll;
+`;
 
 const ProblemsSection: React.FC = (): ReactElement => {
   const problem: Problem = {
@@ -19,7 +26,7 @@ const ProblemsSection: React.FC = (): ReactElement => {
   } as ProblemStatistics;
 
   return (
-    <div>
+    <StyleProblemsSection>
       <ProblemCard
         problem={problem}
         problemStatistics={problemStats}
@@ -32,7 +39,11 @@ const ProblemsSection: React.FC = (): ReactElement => {
         problem={problem}
         problemStatistics={problemStats}
       ></ProblemCard>
-    </div>
+      <ProblemCard
+        problem={problem}
+        problemStatistics={problemStats}
+      ></ProblemCard>
+    </StyleProblemsSection>
   );
 };
 
