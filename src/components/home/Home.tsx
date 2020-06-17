@@ -22,7 +22,7 @@ const Home: React.FC<{}> = (): ReactElement => {
     setVisible(true);
   };
 
-  const randomizeProblem: () => void = async () => {
+  const randomizeProblem: () => void = async (): Promise<void> => {
     setIsLoading(true);
     try {
       const newProblem = await getRandomProblem(selectedTopics);
@@ -47,18 +47,6 @@ const Home: React.FC<{}> = (): ReactElement => {
     >
       <Header></Header>
       <button onClick={() => setIsLoading((prev) => !prev)}>CLICK</button>
-      <button
-        onClick={async () => {
-          setIsLoading(true);
-          const newProblem = await getRandomProblem(selectedTopics);
-          setProblemsList((prev: Array<any>) => {
-            return prev.concat(newProblem);
-          });
-          setIsLoading(false);
-        }}
-      >
-        CLICK
-      </button>
       <Topics
         selectedTopics={selectedTopics}
         setSelectedTopics={setSelectedTopics}
