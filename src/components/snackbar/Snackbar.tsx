@@ -13,10 +13,10 @@ interface SnackbarProps {
 const StyledSnackbar = styled.div<SnackbarProps>`
   background-color: ${(props) => (props.type === 'error' ? 'red' : 'green')};
   color: white;
-  opacity: ${(props) => (props.visible ? '0.8' : '0')};
+  opacity: ${(props) => (props.visible ? '0.9' : '0')};
   visibility: ${(props) => (props.visible ? 'none' : 'hidden')};
   position: absolute;
-  bottom: ${(props) => (props.visible ? '20px' : '-100px')};
+  bottom: ${(props) => (props.visible ? '2.5vh' : '0')};
   left: 0;
   right: 0;
   margin: auto;
@@ -25,6 +25,7 @@ const StyledSnackbar = styled.div<SnackbarProps>`
   width: 300px;
   height: 55px;
   border-radius: 30px;
+  font-weight: 600;
   display: flex;
   justify-content: space-between;
   align-items: center;
