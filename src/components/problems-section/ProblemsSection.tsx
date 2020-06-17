@@ -8,6 +8,21 @@ const StyleProblemsSection = styled.div`
   margin-top: 20px;
   max-height: 300px;
   overflow-y: scroll;
+  scrollbar-color: lightgray white;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: white;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: lightgray;
+    border-radius: 5px;
+  }
 `;
 
 const ProblemsSection: React.FC = (): ReactElement => {
