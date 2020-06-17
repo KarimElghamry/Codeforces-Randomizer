@@ -51,9 +51,19 @@ const Cell = styled.div<CellProps>`
 const ProblemCard: React.FC<CardProps> = (props: CardProps): ReactElement => {
   const problem: Problem = props.problem;
   const problemStats: ProblemStatistics = props.problemStatistics;
+  const baseUrl: string = 'https://codeforces.com/problemset/problem';
+
+  const handleUrlRedirect = () => {
+    const redirectUrl: string = `${baseUrl}/${problem.contestId}/${problem.index}`;
+    window.open(redirectUrl, '_blank');
+  };
 
   return (
-    <StyledProblemCard>
+    <StyledProblemCard
+      onClick={() => {
+        handleUrlRedirect();
+      }}
+    >
       <Cell flex={1}>{`${problemStats.contestId}${problemStats.index}`}</Cell>
       <Cell flex={2}>{`${problem.name}`}</Cell>
       <Cell flex={1}>{`${problem.rating}`}</Cell>
