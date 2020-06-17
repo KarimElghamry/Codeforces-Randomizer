@@ -7,6 +7,7 @@ import styled from 'styled-components';
 const StyleProblemsSection = styled.div`
   margin-top: 20px;
   max-height: 300px;
+  min-width: 450px;
   overflow-y: scroll;
   scrollbar-color: lightgray white;
   scrollbar-width: thin;

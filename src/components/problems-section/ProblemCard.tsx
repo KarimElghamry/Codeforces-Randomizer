@@ -1,5 +1,5 @@
 import React, {ReactElement} from 'react';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 import {Problem} from '../../models/Problem';
 import {ProblemStatistics} from '../../models/ProblemStatistics';
 import {images} from '../../assets';
@@ -13,7 +13,17 @@ interface CellProps {
   flex: number;
 }
 
+const EnterAnim = keyframes`
+from{
+  margin-left: -50%;
+}
+to{
+  margin-left: 20px: 
+}
+`;
+
 const StyledProblemCard = styled.div`
+  max-width: 400px;
   min-width: 400px;
   min-height: 80px;
   background-color: #f8f8f8;
@@ -24,6 +34,7 @@ const StyledProblemCard = styled.div`
   border-radius: 10px;
   cursor: pointer;
   transition-duration: 0.3s;
+  animation: ${EnterAnim} 0.5s cubic-bezier(0.2, 0, 0, 1.2);
 
   &:hover {
     background-color: lightgray;
