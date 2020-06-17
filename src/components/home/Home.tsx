@@ -36,6 +36,15 @@ const Home: React.FC<{}> = (): ReactElement => {
     setVisible(true);
   };
 
+  const randomizeProblem: () => void = async () => {
+    setIsLoading(true);
+    const newProblem = await getRandomProblem(selectedTopics);
+    setProblemsList((prev: Array<any>) => {
+      return prev.concat(newProblem);
+    });
+    setIsLoading(false);
+  };
+
   return (
     <div
       style={{
@@ -49,10 +58,12 @@ const Home: React.FC<{}> = (): ReactElement => {
       <button onClick={() => setIsLoading((prev) => !prev)}>CLICK</button>
       <button
         onClick={async () => {
+          setIsLoading(true);
           const newProblem = await getRandomProblem(selectedTopics);
           setProblemsList((prev: Array<any>) => {
             return prev.concat(newProblem);
           });
+          setIsLoading(false);
         }}
       >
         CLICK
@@ -69,7 +80,10 @@ const Home: React.FC<{}> = (): ReactElement => {
         timeout={2000}
         onCancel={() => setVisible(false)}
       ></Snackbar>
-      <RandomizeButton isLoading={isLoading}></RandomizeButton>
+      <RandomizeButton
+        isLoading={isLoading}
+        onClick={randomizeProblem}
+      ></RandomizeButton>
       <ProblemsSection problemsList={problemsList}></ProblemsSection>
     </div>
   );

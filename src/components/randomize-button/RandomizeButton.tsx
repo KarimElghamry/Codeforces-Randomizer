@@ -5,6 +5,7 @@ import {images} from '../../assets';
 
 interface Props {
   isLoading: boolean;
+  onClick: Function;
 }
 
 const StyledButton = styled.div<Props>`
@@ -35,7 +36,13 @@ const StyledLoopIcon = styled(LoopIcon)`
 
 const RandomizeButton: React.FC<Props> = (props: Props): ReactElement => {
   return (
-    <StyledButton isLoading={props.isLoading}>
+    <StyledButton
+      isLoading={props.isLoading}
+      onClick={() => {
+        if (props.isLoading) return;
+        props.onClick();
+      }}
+    >
       {props.isLoading ? (
         <LoadingIndicator></LoadingIndicator>
       ) : (
