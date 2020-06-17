@@ -21,7 +21,7 @@ const problemStatsEx: ProblemStatistics = {
   solvedCount: 3139,
 } as ProblemStatistics;
 
-const App: React.FC<{}> = (): ReactElement => {
+const Home: React.FC<{}> = (): ReactElement => {
   const [errContent, setErrContent] = useState<string>('');
   const [visible, setVisible] = useState<boolean>(false);
   const [selectedTopics, setSelectedTopics] = useState<Array<string>>([]);
@@ -76,4 +76,4 @@ const App: React.FC<{}> = (): ReactElement => {
   );
 };
 
-export default App;
+export default Home;
