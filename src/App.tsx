@@ -35,6 +35,7 @@ const App: React.FC<{}> = (): ReactElement => {
     setVisible(true);
   };
 
+  let myRef;
   return (
     <div
       style={{

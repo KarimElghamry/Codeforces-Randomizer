@@ -1,4 +1,4 @@
-import React, {ReactElement} from 'react';
+import React, {ReactElement, useEffect} from 'react';
 import ProblemCard from './ProblemCard';
 import {ProblemStatistics} from '../../models/ProblemStatistics';
 import {Problem} from '../../models/Problem';
@@ -32,8 +32,16 @@ const StyleProblemsSection = styled.div`
 
 const ProblemsSection: React.FC<Props> = (props: Props): ReactElement => {
   const problemsList = props.problemsList;
+  let myRef: HTMLDivElement | null = null;
+
+  useEffect(() => {
+    if (!myRef) return;
+
+    myRef.scrollTo({top: myRef.scrollHeight, behavior: 'smooth'});
+  }, [problemsList, myRef]);
+
   return (
-    <StyleProblemsSection>
+    <StyleProblemsSection ref={(ref) => (myRef = ref)}>
       {problemsList.map((val, index) => {
         return (
           <ProblemCard
