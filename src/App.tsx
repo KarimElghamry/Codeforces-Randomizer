@@ -3,6 +3,7 @@ import Snackbar from './components/snackbar/Snackbar';
 import Header from './components/header/Header';
 import Topics from './components/topics/Topics';
 import RandomizeButton from './components/randomize-button/RandomizeButton';
+import ProblemsSection from './components/problems-section/ProblemsSection';
 
 const App: React.FC<{}> = (): ReactElement => {
   const [errContent, setErrContent] = useState<string>('');
@@ -39,6 +40,7 @@ const App: React.FC<{}> = (): ReactElement => {
         onCancel={() => setVisible(false)}
       ></Snackbar>
       <RandomizeButton isLoading={isLoading}></RandomizeButton>
+      <ProblemsSection></ProblemsSection>
     </div>
   );
 };

@@ -3,5 +3,6 @@ export interface Problem {
   index: string;
   name: string;
   type: string;
+  rating?: number;
   tags: Array<string>;
 }
