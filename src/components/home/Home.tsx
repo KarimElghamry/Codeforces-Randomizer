@@ -6,20 +6,7 @@ import Topics from '../topics/Topics';
 import Snackbar from '../snackbar/Snackbar';
 import RandomizeButton from '../randomize-button/RandomizeButton';
 import ProblemsSection from '../problems-section/ProblemsSection';
-
-const problemEx: Problem = {
-  contestId: 1367,
-  index: 'D',
-  name: 'Task on the Board',
-  type: 'PROGRAMMING',
-  rating: 1000,
-} as Problem;
-
-const problemStatsEx: ProblemStatistics = {
-  contestId: 1367,
-  index: 'D',
-  solvedCount: 3139,
-} as ProblemStatistics;
+import {getRandomProblem} from '../../services/problems';
 
 const Home: React.FC<{}> = (): ReactElement => {
   const [errContent, setErrContent] = useState<string>('');
@@ -35,6 +22,20 @@ const Home: React.FC<{}> = (): ReactElement => {
     setVisible(true);
   };
 
+  const randomizeProblem: () => void = async (): Promise<void> => {
+    setIsLoading(true);
+    try {
+      const newProblem = await getRandomProblem(selectedTopics);
+      setProblemsList((prev: Array<any>) => {
+        return prev.concat(newProblem);
+      });
+    } catch (e) {
+      triggerError(e.message);
+    }
+
+    setIsLoading(false);
+  };
+
   return (
     <div
       style={{
@@ -42,22 +43,13 @@ const Home: React.FC<{}> = (): ReactElement => {
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
+        marginTop: '10px',
+        height: '100%',
+        width: '100%',
       }}
     >
       <Header></Header>
       <button onClick={() => setIsLoading((prev) => !prev)}>CLICK</button>
-      <button
-        onClick={() =>
-          setProblemsList((prev: Array<any>) => {
-            return prev.concat({
-              problem: problemEx,
-              problemStatistics: problemStatsEx,
-            });
-          })
-        }
-      >
-        CLICK
-      </button>
       <Topics
         selectedTopics={selectedTopics}
         setSelectedTopics={setSelectedTopics}
@@ -70,7 +62,10 @@ const Home: React.FC<{}> = (): ReactElement => {
         timeout={2000}
         onCancel={() => setVisible(false)}
       ></Snackbar>
-      <RandomizeButton isLoading={isLoading}></RandomizeButton>
+      <RandomizeButton
+        isLoading={isLoading}
+        onClick={randomizeProblem}
+      ></RandomizeButton>
       <ProblemsSection problemsList={problemsList}></ProblemsSection>
     </div>
   );

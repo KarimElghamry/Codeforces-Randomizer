@@ -22,12 +22,12 @@ const StyledSnackbar = styled.div<SnackbarProps>`
   margin: auto;
   padding-left: 15px;
   padding-right: 15px;
-  width: 300px;
+  width: 350px;
   height: 55px;
   border-radius: 30px;
   font-weight: 600;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   user-select: none;
   transition-duration: 0.5s;
@@ -41,6 +41,7 @@ const Snackbar: React.FC<SnackbarProps> = (
   const timeout: number = props.timeout;
 
   useEffect(() => {
+    console.log(document.body.scrollHeight);
     if (visible) {
       const makeInvisible = setTimeout(() => onCancel(), timeout);
       return () => clearTimeout(makeInvisible);
@@ -56,6 +57,7 @@ const Snackbar: React.FC<SnackbarProps> = (
           whiteSpace: 'nowrap',
           overflow: 'hidden',
           display: 'block',
+          flex: '5',
         }}
       >
         {props.content}

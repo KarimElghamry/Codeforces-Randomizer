@@ -33,6 +33,7 @@ const StyledProblemCard = styled.div`
   align-items: center;
   border-radius: 10px;
   cursor: pointer;
+  user-select: none;
   transition-duration: 0.3s;
   animation: ${EnterAnim} 0.5s cubic-bezier(0.2, 0, 0, 1.2);
 
@@ -51,12 +52,24 @@ const Cell = styled.div<CellProps>`
 const ProblemCard: React.FC<CardProps> = (props: CardProps): ReactElement => {
   const problem: Problem = props.problem;
   const problemStats: ProblemStatistics = props.problemStatistics;
+  const baseUrl: string = 'https://codeforces.com/problemset/problem';
+
+  const handleUrlRedirect = () => {
+    const redirectUrl: string = `${baseUrl}/${problem.contestId}/${problem.index}`;
+    window.open(redirectUrl, '_blank');
+  };
 
   return (
-    <StyledProblemCard>
+    <StyledProblemCard
+      onClick={() => {
+        handleUrlRedirect();
+      }}
+    >
       <Cell flex={1}>{`${problemStats.contestId}${problemStats.index}`}</Cell>
       <Cell flex={2}>{`${problem.name}`}</Cell>
-      <Cell flex={1}>{`${problem.rating}`}</Cell>
+      <Cell flex={1}>{`${
+        problem.rating === undefined ? 0 : problem.rating
+      }`}</Cell>
       <Cell flex={1}>
         <img src={images.userIcon} alt=""></img>
         <span>{`x${problemStats.solvedCount}`}</span>
