@@ -7,22 +7,22 @@ interface Props {
   loading: boolean;
 }
 
-const StyledButton = styled.div`
+const StyledButton = styled.div<Props>`
   width: 120px;
   height: 35px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  background-color: #f7b708;
+  background-color: ${(props) => (props.loading ? 'white' : '#f7b708')};
   color: white;
   font-weight: 600;
   border-radius: 6px;
   user-select: none;
   cursor: pointer;
-  transition-duration: 0.5s;
+  transition-duration: 0.3s;
 
   &:hover {
-    background-color: #33ac71;
+    background-color: ${(props) => (props.loading ? 'white' : '#33ac71')};
   }
 `;
 
@@ -35,7 +35,7 @@ const StyledLoopIcon = styled(LoopIcon)`
 
 const RandomizeButton: React.FC<Props> = (props: Props): ReactElement => {
   return (
-    <StyledButton>
+    <StyledButton loading={props.loading}>
       {props.loading ? (
         <LoadingIndicator></LoadingIndicator>
       ) : (
