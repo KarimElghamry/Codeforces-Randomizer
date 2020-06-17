@@ -37,20 +37,22 @@ const ProblemsSection: React.FC<Props> = (props: Props): ReactElement => {
   useEffect(() => {
     if (!wrapperRef) return;
 
-    wrapperRef.scrollTo({top: wrapperRef.scrollHeight, behavior: 'smooth'});
+    wrapperRef.scrollTo({top: 0, behavior: 'smooth'});
   }, [problemsList, wrapperRef]);
 
   return (
     <StyleProblemsSection ref={(ref) => (wrapperRef = ref)}>
-      {problemsList.map((val, index) => {
-        return (
-          <ProblemCard
-            key={index}
-            problem={val.problem}
-            problemStatistics={val.problemStatistics}
-          ></ProblemCard>
-        );
-      })}
+      {problemsList
+        .map((val, index) => {
+          return (
+            <ProblemCard
+              key={index}
+              problem={val.problem}
+              problemStatistics={val.problemStatistics}
+            ></ProblemCard>
+          );
+        })
+        .reverse()}
     </StyleProblemsSection>
   );
 };

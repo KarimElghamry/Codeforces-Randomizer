@@ -49,9 +49,12 @@ const App: React.FC<{}> = (): ReactElement => {
       <button onClick={() => setIsLoading((prev) => !prev)}>CLICK</button>
       <button
         onClick={() =>
-          setProblemsList((prev: Array<any>) =>
-            prev.concat({problem: problemEx, problemStatistics: problemStatsEx})
-          )
+          setProblemsList((prev: Array<any>) => {
+            return prev.concat({
+              problem: problemEx,
+              problemStatistics: problemStatsEx,
+            });
+          })
         }
       >
         CLICK
