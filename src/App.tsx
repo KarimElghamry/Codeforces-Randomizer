@@ -36,7 +36,7 @@ const App: React.FC<{}> = (): ReactElement => {
         timeout={2000}
         onCancel={() => setVisible(false)}
       ></Snackbar>
-      <RandomizeButton></RandomizeButton>
+      <RandomizeButton loading={false}></RandomizeButton>
     </div>
   );
 };
