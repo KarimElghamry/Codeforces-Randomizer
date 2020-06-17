@@ -1,5 +1,6 @@
 import React, {ReactElement} from 'react';
 import styled from 'styled-components';
+import LoadingIndicator from './LoadingIndicator';
 import {images} from '../../assets';
 
 interface Props {
@@ -35,8 +36,14 @@ const StyledLoopIcon = styled(LoopIcon)`
 const RandomizeButton: React.FC<Props> = (props: Props): ReactElement => {
   return (
     <StyledButton>
-      <StyledLoopIcon></StyledLoopIcon>
-      <div>Randomize</div>
+      {props.loading ? (
+        <LoadingIndicator></LoadingIndicator>
+      ) : (
+        <React.Fragment>
+          <StyledLoopIcon></StyledLoopIcon>
+          <div>Randomize</div>
+        </React.Fragment>
+      )}
     </StyledButton>
   );
 };
