@@ -6,6 +6,7 @@ import Topics from '../topics/Topics';
 import Snackbar from '../snackbar/Snackbar';
 import RandomizeButton from '../randomize-button/RandomizeButton';
 import ProblemsSection from '../problems-section/ProblemsSection';
+import {getRandomProblem} from '../../services/problems';
 
 const problemEx: Problem = {
   contestId: 1367,
@@ -47,14 +48,12 @@ const Home: React.FC<{}> = (): ReactElement => {
       <Header></Header>
       <button onClick={() => setIsLoading((prev) => !prev)}>CLICK</button>
       <button
-        onClick={() =>
+        onClick={async () => {
+          const newProblem = await getRandomProblem(selectedTopics);
           setProblemsList((prev: Array<any>) => {
-            return prev.concat({
-              problem: problemEx,
-              problemStatistics: problemStatsEx,
-            });
-          })
-        }
+            return prev.concat(newProblem);
+          });
+        }}
       >
         CLICK
       </button>
