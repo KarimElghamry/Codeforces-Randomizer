@@ -21,8 +21,9 @@ const Circle = styled.div<CircleProps>`
   width: 10px;
   border-radius: 10px;
   margin: 2px;
+  bottom: 5px;
   background-color: ${(props) => props.color};
-  animation: ${BounceAnim} 0.5s cubic-bezier(0.605, 0, 0, 1) infinite;
+  animation: ${BounceAnim} 0.5s cubic-bezier(0.3, 0, 0, 1) infinite;
   animation-direction: alternate;
 
   &:nth-child(1) {

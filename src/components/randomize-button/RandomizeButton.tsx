@@ -4,7 +4,7 @@ import LoadingIndicator from './LoadingIndicator';
 import {images} from '../../assets';
 
 interface Props {
-  loading: boolean;
+  isLoading: boolean;
 }
 
 const StyledButton = styled.div<Props>`
@@ -13,7 +13,7 @@ const StyledButton = styled.div<Props>`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  background-color: ${(props) => (props.loading ? 'white' : '#f7b708')};
+  background-color: ${(props) => (props.isLoading ? 'white' : '#f7b708')};
   color: white;
   font-weight: 600;
   border-radius: 6px;
@@ -22,7 +22,7 @@ const StyledButton = styled.div<Props>`
   transition-duration: 0.3s;
 
   &:hover {
-    background-color: ${(props) => (props.loading ? 'white' : '#33ac71')};
+    background-color: ${(props) => (props.isLoading ? 'white' : '#33ac71')};
   }
 `;
 
@@ -35,8 +35,8 @@ const StyledLoopIcon = styled(LoopIcon)`
 
 const RandomizeButton: React.FC<Props> = (props: Props): ReactElement => {
   return (
-    <StyledButton loading={props.loading}>
-      {props.loading ? (
+    <StyledButton isLoading={props.isLoading}>
+      {props.isLoading ? (
         <LoadingIndicator></LoadingIndicator>
       ) : (
         <React.Fragment>
@@ -49,7 +49,7 @@ const RandomizeButton: React.FC<Props> = (props: Props): ReactElement => {
 };
 
 RandomizeButton.defaultProps = {
-  loading: false,
+  isLoading: false,
 };
 
 export default RandomizeButton;

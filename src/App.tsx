@@ -8,6 +8,8 @@ const App: React.FC<{}> = (): ReactElement => {
   const [errContent, setErrContent] = useState<string>('');
   const [visible, setVisible] = useState<boolean>(false);
   const [selectedTopics, setSelectedTopics] = useState<Array<string>>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const triggerError: (content: string) => void = (content: string) => {
     setErrContent(content);
     setVisible(true);
@@ -23,7 +25,7 @@ const App: React.FC<{}> = (): ReactElement => {
       }}
     >
       <Header></Header>
-      <button onClick={() => triggerError('test error')}>CLICK</button>
+      <button onClick={() => setIsLoading((prev) => !prev)}>CLICK</button>
       <Topics
         selectedTopics={selectedTopics}
         setSelectedTopics={setSelectedTopics}
@@ -36,7 +38,7 @@ const App: React.FC<{}> = (): ReactElement => {
         timeout={2000}
         onCancel={() => setVisible(false)}
       ></Snackbar>
-      <RandomizeButton loading={true}></RandomizeButton>
+      <RandomizeButton isLoading={isLoading}></RandomizeButton>
     </div>
   );
 };
