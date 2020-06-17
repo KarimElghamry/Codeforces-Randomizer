@@ -32,16 +32,16 @@ const StyleProblemsSection = styled.div`
 
 const ProblemsSection: React.FC<Props> = (props: Props): ReactElement => {
   const problemsList = props.problemsList;
-  let myRef: HTMLDivElement | null = null;
+  let wrapperRef: HTMLDivElement | null = null;
 
   useEffect(() => {
-    if (!myRef) return;
+    if (!wrapperRef) return;
 
-    myRef.scrollTo({top: myRef.scrollHeight, behavior: 'smooth'});
-  }, [problemsList, myRef]);
+    wrapperRef.scrollTo({top: wrapperRef.scrollHeight, behavior: 'smooth'});
+  }, [problemsList, wrapperRef]);
 
   return (
-    <StyleProblemsSection ref={(ref) => (myRef = ref)}>
+    <StyleProblemsSection ref={(ref) => (wrapperRef = ref)}>
       {problemsList.map((val, index) => {
         return (
           <ProblemCard
