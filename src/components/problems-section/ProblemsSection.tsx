@@ -4,6 +4,10 @@ import {ProblemStatistics} from '../../models/ProblemStatistics';
 import {Problem} from '../../models/Problem';
 import styled from 'styled-components';
 
+interface Props {
+  problemsList: Array<{problem: Problem; problemStatistics: ProblemStatistics}>;
+}
+
 const StyleProblemsSection = styled.div`
   margin-top: 20px;
   max-height: 300px;
@@ -26,39 +30,19 @@ const StyleProblemsSection = styled.div`
   }
 `;
 
-const ProblemsSection: React.FC = (): ReactElement => {
-  const problem: Problem = {
-    contestId: 1367,
-    index: 'D',
-    name: 'Task on the Board',
-    type: 'PROGRAMMING',
-    rating: 1000,
-  } as Problem;
-
-  const problemStats: ProblemStatistics = {
-    contestId: 1367,
-    index: 'D',
-    solvedCount: 3139,
-  } as ProblemStatistics;
-
+const ProblemsSection: React.FC<Props> = (props: Props): ReactElement => {
+  const problemsList = props.problemsList;
   return (
     <StyleProblemsSection>
-      <ProblemCard
-        problem={problem}
-        problemStatistics={problemStats}
-      ></ProblemCard>
-      <ProblemCard
-        problem={problem}
-        problemStatistics={problemStats}
-      ></ProblemCard>
-      <ProblemCard
-        problem={problem}
-        problemStatistics={problemStats}
-      ></ProblemCard>
-      <ProblemCard
-        problem={problem}
-        problemStatistics={problemStats}
-      ></ProblemCard>
+      {problemsList.map((val, index) => {
+        return (
+          <ProblemCard
+            key={index}
+            problem={val.problem}
+            problemStatistics={val.problemStatistics}
+          ></ProblemCard>
+        );
+      })}
     </StyleProblemsSection>
   );
 };
