@@ -43,6 +43,9 @@ const Home: React.FC<{}> = (): ReactElement => {
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
+        marginTop: '10px',
+        height: '100%',
+        width: '100%',
       }}
     >
       <Header></Header>
