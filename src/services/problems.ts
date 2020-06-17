@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, {AxiosRequestConfig} from 'axios';
 import {Problem} from '../models/Problem';
 import {ProblemStatistics} from '../models/ProblemStatistics';
 
@@ -11,19 +11,29 @@ function getRandomInt(max: number): number {
 export async function getRandomProblem(
   topics: Array<string>
 ): Promise<{problem: Problem; problemStatistics: ProblemStatistics}> {
+  if (topics.length === 0) throw new Error('No topics selected');
+
   const tags: string = topics.reduce(
     (prev: string, current: string, index: number) => {
       return prev + ';' + current;
     }
   );
 
-  console.log(tags);
+  let response: AxiosRequestConfig;
 
-  const response = await axios.get(baseUrl, {
-    params: {
-      tags: tags,
-    },
-  });
+  try {
+    response = await axios.get(baseUrl, {
+      params: {
+        tags: tags,
+      },
+    });
+  } catch (e) {
+    throw new Error('Server error');
+  }
+
+  if (response.data.status !== 'OK') throw new Error('Invalid combination');
+  if (response.data.result.problems.length === 0)
+    throw new Error('No problems found. Try another combination');
 
   const problems: Array<Problem> = response.data.result.problems as Array<
     Problem

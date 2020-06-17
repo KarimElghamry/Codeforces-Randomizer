@@ -8,20 +8,6 @@ import RandomizeButton from '../randomize-button/RandomizeButton';
 import ProblemsSection from '../problems-section/ProblemsSection';
 import {getRandomProblem} from '../../services/problems';
 
-const problemEx: Problem = {
-  contestId: 1367,
-  index: 'D',
-  name: 'Task on the Board',
-  type: 'PROGRAMMING',
-  rating: 1000,
-} as Problem;
-
-const problemStatsEx: ProblemStatistics = {
-  contestId: 1367,
-  index: 'D',
-  solvedCount: 3139,
-} as ProblemStatistics;
-
 const Home: React.FC<{}> = (): ReactElement => {
   const [errContent, setErrContent] = useState<string>('');
   const [visible, setVisible] = useState<boolean>(false);
@@ -38,10 +24,15 @@ const Home: React.FC<{}> = (): ReactElement => {
 
   const randomizeProblem: () => void = async () => {
     setIsLoading(true);
-    const newProblem = await getRandomProblem(selectedTopics);
-    setProblemsList((prev: Array<any>) => {
-      return prev.concat(newProblem);
-    });
+    try {
+      const newProblem = await getRandomProblem(selectedTopics);
+      setProblemsList((prev: Array<any>) => {
+        return prev.concat(newProblem);
+      });
+    } catch (e) {
+      triggerError(e.message);
+    }
+
     setIsLoading(false);
   };
 
