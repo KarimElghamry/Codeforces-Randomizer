@@ -2,6 +2,7 @@ import React, {ReactElement} from 'react';
 import styled from 'styled-components';
 import {Problem} from '../../models/Problem';
 import {ProblemStatistics} from '../../models/ProblemStatistics';
+import {images} from '../../assets';
 
 interface CardProps {
   problem: Problem;
@@ -43,9 +44,12 @@ const ProblemCard: React.FC<CardProps> = (props: CardProps): ReactElement => {
   return (
     <StyledProblemCard>
       <Cell flex={1}>{`${problemStats.contestId}${problemStats.index}`}</Cell>
-      <Cell flex={3}>{`${problem.name}`}</Cell>
+      <Cell flex={2}>{`${problem.name}`}</Cell>
       <Cell flex={1}>{`${problem.rating}`}</Cell>
-      <Cell flex={1}>{`x${problemStats.solvedCount}`}</Cell>
+      <Cell flex={1}>
+        <img src={images.userIcon} alt=""></img>
+        <span>{`x${problemStats.solvedCount}`}</span>
+      </Cell>
     </StyledProblemCard>
   );
 };
