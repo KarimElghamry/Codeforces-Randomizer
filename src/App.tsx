@@ -2,6 +2,7 @@ import React, {ReactElement, useState} from 'react';
 import Snackbar from './components/snackbar/Snackbar';
 import Header from './components/header/Header';
 import Topics from './components/topics/Topics';
+import RandomizeButton from './components/randomize-button/RandomizeButton';
 
 const App: React.FC<{}> = (): ReactElement => {
   const [errContent, setErrContent] = useState<string>('');
@@ -35,6 +36,7 @@ const App: React.FC<{}> = (): ReactElement => {
         timeout={2000}
         onCancel={() => setVisible(false)}
       ></Snackbar>
+      <RandomizeButton></RandomizeButton>
     </div>
   );
 };
