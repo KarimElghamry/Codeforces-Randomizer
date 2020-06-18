@@ -3,6 +3,7 @@ import ProblemCard from './ProblemCard';
 import {ProblemStatistics} from '../../models/ProblemStatistics';
 import {Problem} from '../../models/Problem';
 import styled from 'styled-components';
+import EmptySection from './EmptySection';
 
 interface Props {
   problemsList: Array<{problem: Problem; problemStatistics: ProblemStatistics}>;
@@ -42,17 +43,21 @@ const ProblemsSection: React.FC<Props> = (props: Props): ReactElement => {
 
   return (
     <StyleProblemsSection ref={(ref) => (wrapperRef = ref)}>
-      {problemsList
-        .map((val, index) => {
-          return (
-            <ProblemCard
-              key={index}
-              problem={val.problem}
-              problemStatistics={val.problemStatistics}
-            ></ProblemCard>
-          );
-        })
-        .reverse()}
+      {problemsList.length === 0 ? (
+        <EmptySection></EmptySection>
+      ) : (
+        problemsList
+          .map((val, index) => {
+            return (
+              <ProblemCard
+                key={index}
+                problem={val.problem}
+                problemStatistics={val.problemStatistics}
+              ></ProblemCard>
+            );
+          })
+          .reverse()
+      )}
     </StyleProblemsSection>
   );
 };
