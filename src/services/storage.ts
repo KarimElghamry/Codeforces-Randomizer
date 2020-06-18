@@ -1,7 +1,7 @@
 import {Problem} from '../models/Problem';
 import {ProblemStatistics} from '../models/ProblemStatistics';
 
-export function getPromblemsList(): Array<{
+export function getPromblemsListFromStorage(): Array<{
   problem: Problem;
   problemStatistics: ProblemStatistics;
 }> {
@@ -15,7 +15,7 @@ export function getPromblemsList(): Array<{
   return problemsList;
 }
 
-export function setProblemsList(
+export function setProblemsListToStorage(
   list: Array<{problem: Problem; problemStatistics: ProblemStatistics}>
 ) {
   const storageObject = {
