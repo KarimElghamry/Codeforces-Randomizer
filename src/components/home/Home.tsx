@@ -7,6 +7,7 @@ import Snackbar from '../snackbar/Snackbar';
 import RandomizeButton from '../randomize-button/RandomizeButton';
 import ProblemsSection from '../problems-section/ProblemsSection';
 import {getRandomProblem} from '../../services/problems';
+import {setProblemsListToStorage} from '../../services/storage';
 
 const Home: React.FC<{}> = (): ReactElement => {
   const [errContent, setErrContent] = useState<string>('');
@@ -26,9 +27,9 @@ const Home: React.FC<{}> = (): ReactElement => {
     setIsLoading(true);
     try {
       const newProblem = await getRandomProblem(selectedTopics);
-      setProblemsList((prev: Array<any>) => {
-        return prev.concat(newProblem);
-      });
+      const newProblemsList = problemsList.concat(newProblem);
+      setProblemsListToStorage(newProblemsList);
+      setProblemsList(newProblemsList);
     } catch (e) {
       triggerError(e.message);
     }
