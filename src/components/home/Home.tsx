@@ -63,6 +63,12 @@ const Home: React.FC<Props> = (props: Props): ReactElement => {
         setSelectedTopics={setSelectedTopics}
         triggerError={triggerError}
       ></Topics>
+
+      <RandomizeButton
+        isLoading={isLoading}
+        onClick={randomizeProblem}
+      ></RandomizeButton>
+      <ProblemsSection problemsList={problemsList}></ProblemsSection>
       <Snackbar
         type="error"
         content={errContent}
@@ -70,11 +76,6 @@ const Home: React.FC<Props> = (props: Props): ReactElement => {
         timeout={2000}
         onCancel={() => setVisible(false)}
       ></Snackbar>
-      <RandomizeButton
-        isLoading={isLoading}
-        onClick={randomizeProblem}
-      ></RandomizeButton>
-      <ProblemsSection problemsList={problemsList}></ProblemsSection>
     </div>
   );
 };

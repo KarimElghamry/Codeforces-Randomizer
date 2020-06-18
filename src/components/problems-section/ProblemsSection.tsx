@@ -37,7 +37,7 @@ const ProblemsSection: React.FC<Props> = (props: Props): ReactElement => {
   useEffect(() => {
     if (!wrapperRef) return;
 
-    wrapperRef.scrollTo({top: 0, behavior: 'smooth'});
+    wrapperRef.scrollTo({top: 0, left: 0, behavior: 'smooth'});
   }, [problemsList, wrapperRef]);
 
   return (
