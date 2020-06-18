@@ -10,7 +10,7 @@ interface Props {
 
 const StyleProblemsSection = styled.div`
   margin-top: 20px;
-  max-height: 300px;
+  height: 300px;
   min-width: 450px;
   overflow-y: scroll;
   scrollbar-color: lightgray white;
@@ -37,7 +37,7 @@ const ProblemsSection: React.FC<Props> = (props: Props): ReactElement => {
   useEffect(() => {
     if (!wrapperRef) return;
 
-    wrapperRef.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+    wrapperRef.scrollTo(0, 0);
   }, [problemsList, wrapperRef]);
 
   return (

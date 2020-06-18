@@ -1,13 +1,10 @@
-import React, {ReactElement} from 'react';
 import styled from 'styled-components';
 
-const StyledRow = styled.div`
+const Row = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: row;
+  justify-content: center;
 `;
-
-const Row: React.FC<{}> = (): ReactElement => {
-  return <StyledRow></StyledRow>;
-};
 
 export default Row;

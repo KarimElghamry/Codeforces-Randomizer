@@ -12,6 +12,7 @@ import {
   clearProblemsList,
 } from '../../services/storage';
 import ClearButton from '../clear-button/ClearButton';
+import Row from '../common/Row';
 
 interface Props {
   initialProblemsList: Array<{
@@ -49,6 +50,7 @@ const Home: React.FC<Props> = (props: Props): ReactElement => {
   };
 
   const clearProblemsHistory = (): void => {
+    if (isLoading) return;
     clearProblemsList();
     setProblemsList([]);
   };
@@ -76,8 +78,9 @@ const Home: React.FC<Props> = (props: Props): ReactElement => {
         isLoading={isLoading}
         onClick={randomizeProblem}
       ></RandomizeButton>
-      <ClearButton onClick={clearProblemsHistory}></ClearButton>
       <ProblemsSection problemsList={problemsList}></ProblemsSection>
+      <ClearButton onClick={clearProblemsHistory}></ClearButton>
+
       <Snackbar
         type="error"
         content={errContent}
