@@ -7,15 +7,28 @@ import Snackbar from '../snackbar/Snackbar';
 import RandomizeButton from '../randomize-button/RandomizeButton';
 import ProblemsSection from '../problems-section/ProblemsSection';
 import {getRandomProblem} from '../../services/problems';
+import {
+  setProblemsListToStorage,
+  clearProblemsList,
+} from '../../services/storage';
+import ClearButton from '../clear-button/ClearButton';
+import Row from '../common/Row';
 
-const Home: React.FC<{}> = (): ReactElement => {
+interface Props {
+  initialProblemsList: Array<{
+    problem: Problem;
+    problemStatistics: ProblemStatistics;
+  }>;
+}
+
+const Home: React.FC<Props> = (props: Props): ReactElement => {
   const [errContent, setErrContent] = useState<string>('');
   const [visible, setVisible] = useState<boolean>(false);
   const [selectedTopics, setSelectedTopics] = useState<Array<string>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [problemsList, setProblemsList] = useState<
     Array<{problem: Problem; problemStatistics: ProblemStatistics}>
-  >([]);
+  >(props.initialProblemsList);
 
   const triggerError: (content: string) => void = (content: string) => {
     setErrContent(content);
@@ -26,14 +39,20 @@ const Home: React.FC<{}> = (): ReactElement => {
     setIsLoading(true);
     try {
       const newProblem = await getRandomProblem(selectedTopics);
-      setProblemsList((prev: Array<any>) => {
-        return prev.concat(newProblem);
-      });
+      const newProblemsList = problemsList.concat(newProblem);
+      setProblemsListToStorage(newProblemsList);
+      setProblemsList(newProblemsList);
     } catch (e) {
       triggerError(e.message);
     }
 
     setIsLoading(false);
+  };
+
+  const clearProblemsHistory = (): void => {
+    if (isLoading) return;
+    clearProblemsList();
+    setProblemsList([]);
   };
 
   return (
@@ -44,17 +63,29 @@ const Home: React.FC<{}> = (): ReactElement => {
         alignItems: 'center',
         flexDirection: 'column',
         marginTop: '10px',
-        height: '100%',
         width: '100%',
       }}
     >
       <Header></Header>
       <button onClick={() => setIsLoading((prev) => !prev)}>CLICK</button>
+
       <Topics
         selectedTopics={selectedTopics}
         setSelectedTopics={setSelectedTopics}
         triggerError={triggerError}
       ></Topics>
+
+      <RandomizeButton
+        isLoading={isLoading}
+        onClick={randomizeProblem}
+      ></RandomizeButton>
+
+      <ProblemsSection problemsList={problemsList}></ProblemsSection>
+
+      {problemsList.length === 0 ? null : (
+        <ClearButton onClick={clearProblemsHistory}></ClearButton>
+      )}
+
       <Snackbar
         type="error"
         content={errContent}
@@ -62,11 +93,6 @@ const Home: React.FC<{}> = (): ReactElement => {
         timeout={2000}
         onCancel={() => setVisible(false)}
       ></Snackbar>
-      <RandomizeButton
-        isLoading={isLoading}
-        onClick={randomizeProblem}
-      ></RandomizeButton>
-      <ProblemsSection problemsList={problemsList}></ProblemsSection>
     </div>
   );
 };

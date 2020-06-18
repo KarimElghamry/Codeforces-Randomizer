@@ -3,6 +3,7 @@ import ProblemCard from './ProblemCard';
 import {ProblemStatistics} from '../../models/ProblemStatistics';
 import {Problem} from '../../models/Problem';
 import styled from 'styled-components';
+import EmptySection from './EmptySection';
 
 interface Props {
   problemsList: Array<{problem: Problem; problemStatistics: ProblemStatistics}>;
@@ -10,7 +11,7 @@ interface Props {
 
 const StyleProblemsSection = styled.div`
   margin-top: 20px;
-  max-height: 300px;
+  height: 300px;
   min-width: 450px;
   overflow-y: scroll;
   scrollbar-color: lightgray white;
@@ -37,22 +38,26 @@ const ProblemsSection: React.FC<Props> = (props: Props): ReactElement => {
   useEffect(() => {
     if (!wrapperRef) return;
 
-    wrapperRef.scrollTo({top: 0, behavior: 'smooth'});
+    wrapperRef.scrollTo(0, 0);
   }, [problemsList, wrapperRef]);
 
   return (
     <StyleProblemsSection ref={(ref) => (wrapperRef = ref)}>
-      {problemsList
-        .map((val, index) => {
-          return (
-            <ProblemCard
-              key={index}
-              problem={val.problem}
-              problemStatistics={val.problemStatistics}
-            ></ProblemCard>
-          );
-        })
-        .reverse()}
+      {problemsList.length === 0 ? (
+        <EmptySection></EmptySection>
+      ) : (
+        problemsList
+          .map((val, index) => {
+            return (
+              <ProblemCard
+                key={index}
+                problem={val.problem}
+                problemStatistics={val.problemStatistics}
+              ></ProblemCard>
+            );
+          })
+          .reverse()
+      )}
     </StyleProblemsSection>
   );
 };
