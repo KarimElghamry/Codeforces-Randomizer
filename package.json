@@ -15,6 +15,7 @@
     "axios": "^0.19.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-range": "^1.6.7",
     "react-scripts": "3.4.1",
     "styled-components": "^5.1.1",
     "typescript": "^3.7.5"
@@ -39,5 +40,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-rangeslider": "^2.2.2"
   }
 }

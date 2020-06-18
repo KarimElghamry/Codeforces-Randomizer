@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const StyledEmptySecion = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -12,7 +13,8 @@ const StyledEmptySecion = styled.div`
 const EmptySection: React.FC<{}> = (): ReactElement => {
   return (
     <StyledEmptySecion>
-      <div>Choose topics and press Randomize to start adding problems</div>
+      <div>Choose topics and press Randomize</div>
+      <div>to start adding problems</div>
     </StyledEmptySecion>
   );
 };
