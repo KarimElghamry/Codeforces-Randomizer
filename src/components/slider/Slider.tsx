@@ -1,11 +1,18 @@
 import React, {ReactElement, useState} from 'react';
 import {Range, getTrackBackground} from 'react-range';
 import styled from 'styled-components';
+import {minRating, maxRating} from '../../services/data';
 
 interface TrackProps {
   values: Array<number>;
   min: number;
   max: number;
+}
+
+interface SliderProps {
+  minRating: number;
+  maxRating: number;
+  onChange: Function;
 }
 
 const Container = styled.div`
@@ -47,21 +54,18 @@ const Indicator = styled.div<{isDragged: boolean}>`
   background-color: ${(props) => (props.isDragged ? '#198FCE' : 'white')};
 `;
 
-const min = 800;
-const max = 3500;
-
-const Slider: React.FC<{}> = (): ReactElement => {
-  const [values, setValues] = useState<Array<number>>([800, 3500]);
+const Slider: React.FC<SliderProps> = (props: SliderProps): ReactElement => {
+  const values = [props.minRating, props.maxRating];
   return (
     <Container>
       <Range
         step={100}
-        min={min}
-        max={max}
+        min={minRating}
+        max={maxRating}
         values={values}
-        onChange={(values) => setValues(values)}
+        onChange={(values) => props.onChange({min: values[0], max: values[1]})}
         renderTrack={({props, children}) => (
-          <Track min={min} max={max} values={values} {...props}>
+          <Track min={minRating} max={maxRating} values={values} {...props}>
             {children}
           </Track>
         )}

@@ -12,8 +12,8 @@ import {
   clearProblemsList,
 } from '../../services/storage';
 import ClearButton from '../clear-button/ClearButton';
-import Row from '../common/Row';
 import Slider from '../slider/Slider';
+import {minRating, maxRating} from '../../services/data';
 
 interface Props {
   initialProblemsList: Array<{
@@ -27,6 +27,10 @@ const Home: React.FC<Props> = (props: Props): ReactElement => {
   const [visible, setVisible] = useState<boolean>(false);
   const [selectedTopics, setSelectedTopics] = useState<Array<string>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [rating, setRating] = useState<{min: number; max: number}>({
+    min: minRating,
+    max: maxRating,
+  });
   const [problemsList, setProblemsList] = useState<
     Array<{problem: Problem; problemStatistics: ProblemStatistics}>
   >(props.initialProblemsList);
@@ -76,7 +80,11 @@ const Home: React.FC<Props> = (props: Props): ReactElement => {
         triggerError={triggerError}
       ></Topics>
 
-      <Slider></Slider>
+      <Slider
+        minRating={rating.min}
+        maxRating={rating.max}
+        onChange={setRating}
+      ></Slider>
       <RandomizeButton
         isLoading={isLoading}
         onClick={randomizeProblem}
