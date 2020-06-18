@@ -12,7 +12,7 @@ interface Props {
 const StyleProblemsSection = styled.div`
   margin-top: 20px;
   height: 300px;
-  width: 450px;
+  width: 500px;
   overflow-y: scroll;
   scrollbar-color: lightgray white;
   scrollbar-width: thin;
