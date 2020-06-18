@@ -12,7 +12,7 @@ interface Props {
 const StyleProblemsSection = styled.div`
   margin-top: 20px;
   height: 300px;
-  min-width: 450px;
+  width: 450px;
   overflow-y: scroll;
   scrollbar-color: lightgray white;
   scrollbar-width: thin;
@@ -28,6 +28,10 @@ const StyleProblemsSection = styled.div`
   &::-webkit-scrollbar-thumb {
     background-color: lightgray;
     border-radius: 5px;
+  }
+
+  @media screen and (max-width: 600px) {
+    width: 400px;
   }
 `;
 
