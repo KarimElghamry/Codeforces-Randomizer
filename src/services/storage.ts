@@ -24,3 +24,7 @@ export function setProblemsListToStorage(
 
   localStorage.setItem('problemsList', JSON.stringify(storageObject));
 }
+
+export function clearProblemsList(): void {
+  localStorage.setItem('problemsList', JSON.stringify({problemsList: []}));
+}
