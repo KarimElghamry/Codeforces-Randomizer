@@ -9,14 +9,21 @@ import ProblemsSection from '../problems-section/ProblemsSection';
 import {getRandomProblem} from '../../services/problems';
 import {setProblemsListToStorage} from '../../services/storage';
 
-const Home: React.FC<{}> = (): ReactElement => {
+interface Props {
+  initialProblemsList: Array<{
+    problem: Problem;
+    problemStatistics: ProblemStatistics;
+  }>;
+}
+
+const Home: React.FC<Props> = (props: Props): ReactElement => {
   const [errContent, setErrContent] = useState<string>('');
   const [visible, setVisible] = useState<boolean>(false);
   const [selectedTopics, setSelectedTopics] = useState<Array<string>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [problemsList, setProblemsList] = useState<
     Array<{problem: Problem; problemStatistics: ProblemStatistics}>
-  >([]);
+  >(props.initialProblemsList);
 
   const triggerError: (content: string) => void = (content: string) => {
     setErrContent(content);
