@@ -33,9 +33,12 @@ const Home: React.FC<Props> = (props: Props): ReactElement => {
     setVisible(true);
   };
 
-  const randomizeProblem: () => void = async (): Promise<void> => {
+  const randomizeProblem: (ratings: {
+    min: number;
+    max: number;
+  }) => void = async (ratings: {min: number; max: number}): Promise<void> => {
     try {
-      const newProblem = await getRandomProblem(selectedTopics);
+      const newProblem = await getRandomProblem(selectedTopics, ratings);
       const newProblemsList = problemsList.concat(newProblem);
       setProblemsListToStorage(newProblemsList);
       setProblemsList(newProblemsList);

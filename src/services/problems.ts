@@ -9,7 +9,8 @@ function getRandomInt(max: number): number {
 }
 
 export async function getRandomProblem(
-  topics: Array<string>
+  topics: Array<string>,
+  ratings: {min: number; max: number}
 ): Promise<{problem: Problem; problemStatistics: ProblemStatistics}> {
   if (topics.length === 0) throw new Error('No topics selected');
 
@@ -32,8 +33,6 @@ export async function getRandomProblem(
   }
 
   if (response.data.status !== 'OK') throw new Error('Invalid combination');
-  if (response.data.result.problems.length === 0)
-    throw new Error('No problems found. Try another combination');
 
   const problems: Array<Problem> = response.data.result.problems as Array<
     Problem
@@ -41,7 +40,19 @@ export async function getRandomProblem(
   const problemsStatistics: Array<ProblemStatistics> = response.data.result
     .problemStatistics as Array<ProblemStatistics>;
 
-  const probIndex: number = getRandomInt(problems.length);
+  let filteredProblems: Array<number> = [];
+  problems.forEach((val: Problem, index: number) => {
+    if (!val.rating) val.rating = ratings.min;
+
+    if (val.rating >= ratings.min && val.rating <= ratings.max)
+      filteredProblems = filteredProblems.concat(index);
+  });
+
+  if (filteredProblems.length === 0)
+    throw new Error('No problems found. Try another combination');
+
+  const probIndex: number =
+    filteredProblems[getRandomInt(filteredProblems.length)];
   return {
     problem: problems[probIndex],
     problemStatistics: problemsStatistics[probIndex],

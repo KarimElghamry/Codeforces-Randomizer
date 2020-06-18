@@ -24,7 +24,7 @@ const Options: React.FC<Props> = (props: Props): ReactElement => {
 
   const randomizeProblem = async () => {
     setIsLoading(true);
-    await props.onRandomize();
+    await props.onRandomize(rating);
     setIsLoading(false);
   };
   return (
