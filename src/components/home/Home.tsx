@@ -4,7 +4,6 @@ import {ProblemStatistics} from '../../models/ProblemStatistics';
 import Header from '../header/Header';
 import Topics from '../topics/Topics';
 import Snackbar from '../snackbar/Snackbar';
-import RandomizeButton from '../randomize-button/RandomizeButton';
 import ProblemsSection from '../problems-section/ProblemsSection';
 import {getRandomProblem} from '../../services/problems';
 import {
@@ -12,8 +11,7 @@ import {
   clearProblemsList,
 } from '../../services/storage';
 import ClearButton from '../clear-button/ClearButton';
-import Slider from '../slider/Slider';
-import {minRating, maxRating} from '../../services/data';
+import Options from '../options/Options';
 
 interface Props {
   initialProblemsList: Array<{
@@ -26,11 +24,6 @@ const Home: React.FC<Props> = (props: Props): ReactElement => {
   const [errContent, setErrContent] = useState<string>('');
   const [visible, setVisible] = useState<boolean>(false);
   const [selectedTopics, setSelectedTopics] = useState<Array<string>>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [rating, setRating] = useState<{min: number; max: number}>({
-    min: minRating,
-    max: maxRating,
-  });
   const [problemsList, setProblemsList] = useState<
     Array<{problem: Problem; problemStatistics: ProblemStatistics}>
   >(props.initialProblemsList);
@@ -41,7 +34,6 @@ const Home: React.FC<Props> = (props: Props): ReactElement => {
   };
 
   const randomizeProblem: () => void = async (): Promise<void> => {
-    setIsLoading(true);
     try {
       const newProblem = await getRandomProblem(selectedTopics);
       const newProblemsList = problemsList.concat(newProblem);
@@ -50,12 +42,9 @@ const Home: React.FC<Props> = (props: Props): ReactElement => {
     } catch (e) {
       triggerError(e.message);
     }
-
-    setIsLoading(false);
   };
 
   const clearProblemsHistory = (): void => {
-    if (isLoading) return;
     clearProblemsList();
     setProblemsList([]);
   };
@@ -72,24 +61,13 @@ const Home: React.FC<Props> = (props: Props): ReactElement => {
       }}
     >
       <Header></Header>
-      <button onClick={() => setIsLoading((prev) => !prev)}>CLICK</button>
 
       <Topics
         selectedTopics={selectedTopics}
         setSelectedTopics={setSelectedTopics}
         triggerError={triggerError}
       ></Topics>
-
-      <Slider
-        minRating={rating.min}
-        maxRating={rating.max}
-        onChange={setRating}
-      ></Slider>
-      <RandomizeButton
-        isLoading={isLoading}
-        onClick={randomizeProblem}
-      ></RandomizeButton>
-
+      <Options onRandomize={randomizeProblem}></Options>
       <ProblemsSection problemsList={problemsList}></ProblemsSection>
 
       {problemsList.length === 0 ? null : (
