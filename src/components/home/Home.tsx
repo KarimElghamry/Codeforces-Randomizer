@@ -12,7 +12,6 @@ import {
   clearProblemsList,
 } from '../../services/storage';
 import ClearButton from '../clear-button/ClearButton';
-import Row from '../common/Row';
 
 interface Props {
   initialProblemsList: Array<{
