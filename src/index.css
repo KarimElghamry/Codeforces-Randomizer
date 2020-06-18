@@ -1,10 +1,15 @@
+@font-face {
+  font-family: Kanit;
+  src: url('../src/assets/Kanit.ttf');
+}
+
 html,
 body {
   height: 95%;
   margin: 0px;
   padding: 0px;
   background-color: white;
-
+  font-family: Kanit;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
