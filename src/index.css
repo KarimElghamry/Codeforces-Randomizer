@@ -5,11 +5,16 @@
 
 html,
 body {
-  height: 95%;
+  height: 100%;
   margin: 0px;
   padding: 0px;
   background-color: white;
   font-family: Kanit;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
 }

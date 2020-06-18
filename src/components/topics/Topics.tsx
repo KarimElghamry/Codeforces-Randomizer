@@ -2,6 +2,7 @@ import React, {ReactElement} from 'react';
 import styled from 'styled-components';
 import Tag from './Tag';
 import {getTags} from '../../services/data';
+import Row from '../common/Row';
 
 interface Props {
   selectedTopics: Array<string>;
@@ -15,6 +16,7 @@ const Container = styled.div`
   border: lightgray solid 1px;
   border-radius: 10px;
   margin: 10px;
+  margin-top: 5px;
   padding: 10px;
   display: block;
 `;
@@ -39,19 +41,21 @@ const Topics: React.FC<Props> = (props: Props): ReactElement => {
   };
 
   return (
-    <Container>
-      {tags.map((val: string) => {
-        const selected: boolean = selectedTopics.includes(val);
-        return (
-          <Tag
-            key={val}
-            selected={selected}
-            content={val}
-            onClick={handleTopicAddition}
-          ></Tag>
-        );
-      })}
-    </Container>
+    <Row>
+      <Container>
+        {tags.map((val: string) => {
+          const selected: boolean = selectedTopics.includes(val);
+          return (
+            <Tag
+              key={val}
+              selected={selected}
+              content={val}
+              onClick={handleTopicAddition}
+            ></Tag>
+          );
+        })}
+      </Container>
+    </Row>
   );
 };
 
