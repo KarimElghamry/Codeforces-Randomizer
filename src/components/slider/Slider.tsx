@@ -1,15 +1,22 @@
-import React, {ReactElement} from 'react';
+import React, {ReactElement, useState} from 'react';
 import {Range} from 'react-range';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  width: 200px;
+  margin: 20px;
+`;
 
 const Slider: React.FC<{}> = (): ReactElement => {
+  const [values, setValues] = useState<Array<number>>([800, 3500]);
   return (
-    <div>
+    <Container>
       <Range
-        step={1}
-        min={0}
-        max={100}
-        values={[1, 2]}
-        onChange={(values) => console.log('changed')}
+        step={100}
+        min={800}
+        max={3500}
+        values={values}
+        onChange={(values) => setValues(values)}
         renderTrack={({props, children}) => (
           <div
             {...props}
@@ -35,7 +42,7 @@ const Slider: React.FC<{}> = (): ReactElement => {
           />
         )}
       />
-    </div>
+    </Container>
   );
 };
 

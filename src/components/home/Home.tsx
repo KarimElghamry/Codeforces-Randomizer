@@ -13,6 +13,7 @@ import {
 } from '../../services/storage';
 import ClearButton from '../clear-button/ClearButton';
 import Row from '../common/Row';
+import Slider from '../slider/Slider';
 
 interface Props {
   initialProblemsList: Array<{
@@ -74,6 +75,7 @@ const Home: React.FC<Props> = (props: Props): ReactElement => {
         setSelectedTopics={setSelectedTopics}
         triggerError={triggerError}
       ></Topics>
+      <Slider></Slider>
 
       <RandomizeButton
         isLoading={isLoading}
