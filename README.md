@@ -14,7 +14,7 @@ deployed at: https://karimelghamry.github.io/Codeforces-Randomizer/
 
 - Press `Randomize` to retrieve a random problem from Codeforces based on your inputs.
 
-<p><img height="400px" src="screenshots/SS1.png"></p>
+<p align="center"><img height="400px" src="screenshots/SS1.PNG"></p>
 
 ## Features
 
