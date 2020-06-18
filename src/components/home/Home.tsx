@@ -21,6 +21,15 @@ interface Props {
   }>;
 }
 
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 10px;
+  width: 100%;
+`;
+
 const Home: React.FC<Props> = (props: Props): ReactElement => {
   const [errContent, setErrContent] = useState<string>('');
   const [visible, setVisible] = useState<boolean>(false);
@@ -53,14 +62,6 @@ const Home: React.FC<Props> = (props: Props): ReactElement => {
     setProblemsList([]);
   };
 
-  const Container = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 10px;
-    width: 100%;
-  `;
   return (
     <Container>
       <Header></Header>
