@@ -41,7 +41,6 @@ const Snackbar: React.FC<SnackbarProps> = (
   const timeout: number = props.timeout;
 
   useEffect(() => {
-    console.log(document.body.scrollHeight);
     if (visible) {
       const makeInvisible = setTimeout(() => onCancel(), timeout);
       return () => clearTimeout(makeInvisible);
