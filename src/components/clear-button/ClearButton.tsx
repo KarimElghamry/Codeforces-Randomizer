@@ -13,12 +13,18 @@ const StyledButton = styled.div`
   justify-content: space-evenly;
   align-items: center;
   background-color: red;
+  border: red solid 2px;
   color: white;
   font-weight: 600;
   border-radius: 6px;
   user-select: none;
   cursor: pointer;
   transition-duration: 0.3s;
+
+  &:hover {
+    background-color: white;
+    color: red;
+  }
 `;
 
 const ClearButton: React.FC<Props> = (props: Props): ReactElement => {

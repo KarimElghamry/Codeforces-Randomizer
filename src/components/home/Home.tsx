@@ -63,23 +63,28 @@ const Home: React.FC<Props> = (props: Props): ReactElement => {
         alignItems: 'center',
         flexDirection: 'column',
         marginTop: '10px',
-        height: '100%',
         width: '100%',
       }}
     >
       <Header></Header>
       <button onClick={() => setIsLoading((prev) => !prev)}>CLICK</button>
+
       <Topics
         selectedTopics={selectedTopics}
         setSelectedTopics={setSelectedTopics}
         triggerError={triggerError}
       ></Topics>
+
       <RandomizeButton
         isLoading={isLoading}
         onClick={randomizeProblem}
       ></RandomizeButton>
+
       <ProblemsSection problemsList={problemsList}></ProblemsSection>
-      <ClearButton onClick={clearProblemsHistory}></ClearButton>
+
+      {problemsList.length === 0 ? null : (
+        <ClearButton onClick={clearProblemsHistory}></ClearButton>
+      )}
 
       <Snackbar
         type="error"
