@@ -23,8 +23,7 @@ to{
 `;
 
 const StyledProblemCard = styled.div`
-  max-width: 400px;
-  min-width: 400px;
+  width: 90%;
   min-height: 80px;
   background-color: #f8f8f8;
   margin: 20px;

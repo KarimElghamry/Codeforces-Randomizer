@@ -13,6 +13,7 @@ import {
 import ClearButton from '../clear-button/ClearButton';
 import Options from '../options/Options';
 import styled from 'styled-components';
+import Footer from '../footer/Footer';
 
 interface Props {
   initialProblemsList: Array<{
@@ -23,10 +24,10 @@ interface Props {
 
 const Container = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  margin-top: 10px;
+  min-height: 100vh;
   width: 100%;
 `;
 
@@ -74,9 +75,12 @@ const Home: React.FC<Props> = (props: Props): ReactElement => {
       <Options onRandomize={randomizeProblem}></Options>
       <ProblemsSection problemsList={problemsList}></ProblemsSection>
 
-      {problemsList.length === 0 ? null : (
-        <ClearButton onClick={clearProblemsHistory}></ClearButton>
-      )}
+      <ClearButton
+        onClick={clearProblemsHistory}
+        disabled={problemsList.length === 0}
+      ></ClearButton>
+
+      <Footer></Footer>
 
       <Snackbar
         type="error"
