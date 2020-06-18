@@ -1,4 +1,4 @@
-import React, {ReactElement, useState} from 'react';
+import React, {ReactElement} from 'react';
 import {Range, getTrackBackground} from 'react-range';
 import styled from 'styled-components';
 import {minRating, maxRating} from '../../services/data';
