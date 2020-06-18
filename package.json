@@ -1,6 +1,7 @@
 {
   "name": "codeforces-randomizer",
   "version": "0.1.0",
+  "homepage": "https://karimelghamry.github.io/Codeforces-Randomizer",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -24,7 +25,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -42,6 +45,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-rangeslider": "^2.2.2"
+    "@types/react-rangeslider": "^2.2.2",
+    "gh-pages": "^3.0.0"
   }
 }
