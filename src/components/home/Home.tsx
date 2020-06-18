@@ -12,6 +12,7 @@ import {
 } from '../../services/storage';
 import ClearButton from '../clear-button/ClearButton';
 import Options from '../options/Options';
+import styled from 'styled-components';
 
 interface Props {
   initialProblemsList: Array<{
@@ -52,17 +53,16 @@ const Home: React.FC<Props> = (props: Props): ReactElement => {
     setProblemsList([]);
   };
 
+  const Container = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10px;
+    width: 100%;
+  `;
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
-        marginTop: '10px',
-        width: '100%',
-      }}
-    >
+    <Container>
       <Header></Header>
 
       <Topics
@@ -84,7 +84,7 @@ const Home: React.FC<Props> = (props: Props): ReactElement => {
         timeout={2000}
         onCancel={() => setVisible(false)}
       ></Snackbar>
-    </div>
+    </Container>
   );
 };
 
