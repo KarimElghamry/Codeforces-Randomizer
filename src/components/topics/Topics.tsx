@@ -10,7 +10,7 @@ interface Props {
 }
 
 const Container = styled.div`
-  max-width: 600px;
+  max-width: 650px;
   min-width: 100px;
   border: lightgray solid 1px;
   border-radius: 10px;
