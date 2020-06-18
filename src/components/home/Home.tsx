@@ -75,8 +75,8 @@ const Home: React.FC<Props> = (props: Props): ReactElement => {
         setSelectedTopics={setSelectedTopics}
         triggerError={triggerError}
       ></Topics>
-      <Slider></Slider>
 
+      <Slider></Slider>
       <RandomizeButton
         isLoading={isLoading}
         onClick={randomizeProblem}

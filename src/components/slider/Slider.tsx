@@ -13,7 +13,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 200px;
+  width: 250px;
   margin: 20px;
 `;
 

@@ -9,6 +9,7 @@ interface Props {
 }
 
 const StyledButton = styled.div<Props>`
+  padding: 2px;
   width: 120px;
   height: 35px;
   display: flex;
