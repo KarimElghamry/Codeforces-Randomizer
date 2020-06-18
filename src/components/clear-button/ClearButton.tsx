@@ -1,9 +1,14 @@
 import React, {ReactElement} from 'react';
 import styled from 'styled-components';
 
+interface Props {
+  onClick: Function;
+}
+
 const StyledButton = styled.div`
   width: 120px;
   height: 35px;
+  margin: 20px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -16,8 +21,8 @@ const StyledButton = styled.div`
   transition-duration: 0.3s;
 `;
 
-const ClearButton: React.FC = (): ReactElement => {
-  return <StyledButton>Clear</StyledButton>;
+const ClearButton: React.FC<Props> = (props: Props): ReactElement => {
+  return <StyledButton onClick={() => props.onClick()}>Clear</StyledButton>;
 };
 
 export default ClearButton;

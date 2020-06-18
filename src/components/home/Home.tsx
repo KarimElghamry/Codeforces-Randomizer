@@ -7,7 +7,11 @@ import Snackbar from '../snackbar/Snackbar';
 import RandomizeButton from '../randomize-button/RandomizeButton';
 import ProblemsSection from '../problems-section/ProblemsSection';
 import {getRandomProblem} from '../../services/problems';
-import {setProblemsListToStorage} from '../../services/storage';
+import {
+  setProblemsListToStorage,
+  clearProblemsList,
+} from '../../services/storage';
+import ClearButton from '../clear-button/ClearButton';
 
 interface Props {
   initialProblemsList: Array<{
@@ -44,6 +48,11 @@ const Home: React.FC<Props> = (props: Props): ReactElement => {
     setIsLoading(false);
   };
 
+  const clearProblemsHistory = (): void => {
+    clearProblemsList();
+    setProblemsList([]);
+  };
+
   return (
     <div
       style={{
@@ -68,6 +77,7 @@ const Home: React.FC<Props> = (props: Props): ReactElement => {
         isLoading={isLoading}
         onClick={randomizeProblem}
       ></RandomizeButton>
+      <ClearButton onClick={clearProblemsHistory}></ClearButton>
       <ProblemsSection problemsList={problemsList}></ProblemsSection>
       <Snackbar
         type="error"
