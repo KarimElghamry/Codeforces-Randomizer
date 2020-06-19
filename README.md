@@ -1,3 +1,10 @@
+<style>
+.temp {
+    margin-right: 20px;
+    margin-left: 20px;
+}
+</style>
+
 # Codeforces Randomizer
 
 Built using React, Styled Componenents and Typescript.
@@ -14,7 +21,8 @@ deployed at: https://karimelghamry.github.io/Codeforces-Randomizer/
 
 - Press `Randomize` to retrieve a random problem from Codeforces based on your inputs.
 
-<p align='center'><img height="400px" src="screenshots/SS1.PNG"></p>
+<p align='center'><img height="483px" src="screenshots/SS1.PNG"> <img height="483px" src="screenshots/SS2.png"></p> 
+<p align='center'><img class="temp" height="483px" src="screenshots/SS3.png"> <img class="temp" height="483px" src="screenshots/SS4.png"></p>
 
 ## Features
 
