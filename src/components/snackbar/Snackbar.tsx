@@ -15,7 +15,7 @@ const StyledSnackbar = styled.div<SnackbarProps>`
   color: white;
   opacity: ${(props) => (props.visible ? '0.9' : '0')};
   visibility: ${(props) => (props.visible ? 'none' : 'hidden')};
-  position: absolute;
+  position: fixed;
   bottom: ${(props) => (props.visible ? '2.5vh' : '0')};
   left: 0;
   right: 0;
