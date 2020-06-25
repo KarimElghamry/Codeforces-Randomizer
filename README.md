@@ -1,6 +1,6 @@
 # Codeforces Randomizer
 
-Built using React, Styled Componenents and Typescript.
+Built using React, Styled components and Typescript.
 
 deployed at: https://karimelghamry.github.io/Codeforces-Randomizer/
 
