@@ -1,8 +1,9 @@
-import axios, {AxiosRequestConfig} from 'axios';
-import {Problem} from '../models/Problem';
-import {ProblemStatistics} from '../models/ProblemStatistics';
+import axios, { AxiosRequestConfig } from "axios";
+import { Problem } from "../models/Problem";
+import { ProblemStatistics } from "../models/ProblemStatistics";
+import { getTags } from "./data";
 
-const baseUrl: string = 'https://codeforces.com/api/problemset.problems';
+const baseUrl: string = "https://codeforces.com/api/problemset.problems";
 
 function getRandomInt(max: number): number {
   return Math.floor(Math.random() * Math.floor(max));
@@ -10,13 +11,14 @@ function getRandomInt(max: number): number {
 
 export async function getRandomProblem(
   topics: Array<string>,
-  ratings: {min: number; max: number}
-): Promise<{problem: Problem; problemStatistics: ProblemStatistics}> {
-  if (topics.length === 0) throw new Error('No topics selected');
+  ratings: { min: number; max: number }
+): Promise<{ problem: Problem; problemStatistics: ProblemStatistics }> {
+  if (topics.length === 0)
+    topics = topics.concat(getTags()[getRandomInt(getTags().length)]);
 
   const tags: string = topics.reduce(
     (prev: string, current: string, index: number) => {
-      return prev + ';' + current;
+      return prev + ";" + current;
     }
   );
 
@@ -29,14 +31,13 @@ export async function getRandomProblem(
       },
     });
   } catch (e) {
-    throw new Error('Server error');
+    throw new Error("Server error");
   }
 
-  if (response.data.status !== 'OK') throw new Error('Invalid combination');
+  if (response.data.status !== "OK") throw new Error("Invalid combination");
 
-  const problems: Array<Problem> = response.data.result.problems as Array<
-    Problem
-  >;
+  const problems: Array<Problem> = response.data.result
+    .problems as Array<Problem>;
   const problemsStatistics: Array<ProblemStatistics> = response.data.result
     .problemStatistics as Array<ProblemStatistics>;
 
@@ -49,7 +50,12 @@ export async function getRandomProblem(
   });
 
   if (filteredProblems.length === 0)
-    throw new Error('No problems found. Try another combination');
+    throw new Error(
+      `No problems found for ${tags.replace(
+        /;/g,
+        ","
+      )}. Try another combination.`
+    );
 
   const probIndex: number =
     filteredProblems[getRandomInt(filteredProblems.length)];

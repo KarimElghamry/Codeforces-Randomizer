@@ -1,6 +1,6 @@
-import React, {ReactElement, useEffect} from 'react';
-import styled from 'styled-components';
-import CancelButton from './CancelButton';
+import React, { ReactElement, useEffect } from "react";
+import styled from "styled-components";
+import CancelButton from "./CancelButton";
 
 interface SnackbarProps {
   visible: boolean;
@@ -11,18 +11,18 @@ interface SnackbarProps {
 }
 
 const StyledSnackbar = styled.div<SnackbarProps>`
-  background-color: ${(props) => (props.type === 'error' ? 'red' : 'green')};
+  background-color: ${(props) => (props.type === "error" ? "red" : "green")};
   color: white;
-  opacity: ${(props) => (props.visible ? '0.9' : '0')};
-  visibility: ${(props) => (props.visible ? 'none' : 'hidden')};
+  opacity: ${(props) => (props.visible ? "0.9" : "0")};
+  visibility: ${(props) => (props.visible ? "none" : "hidden")};
   position: fixed;
-  bottom: ${(props) => (props.visible ? '2.5vh' : '0')};
+  bottom: ${(props) => (props.visible ? "2.5vh" : "0")};
   left: 0;
   right: 0;
   margin: auto;
   padding-left: 15px;
   padding-right: 15px;
-  width: 350px;
+  width: fit-content;
   height: 55px;
   border-radius: 30px;
   font-weight: 600;
@@ -53,11 +53,11 @@ const Snackbar: React.FC<SnackbarProps> = (
       <div
         style={{
           maxLines: 1,
-          textOverflow: 'ellipsis',
-          whiteSpace: 'nowrap',
-          overflow: 'hidden',
-          display: 'block',
-          flex: '5',
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          display: "block",
+          flex: "5",
         }}
       >
         {props.content}
@@ -68,7 +68,7 @@ const Snackbar: React.FC<SnackbarProps> = (
 };
 
 Snackbar.defaultProps = {
-  type: 'error',
+  type: "error",
 };
 
 export default Snackbar;
