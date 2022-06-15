@@ -1,19 +1,19 @@
-import React, {ReactElement, useState} from 'react';
-import {Problem} from '../../models/Problem';
-import {ProblemStatistics} from '../../models/ProblemStatistics';
-import Header from '../header/Header';
-import Topics from '../topics/Topics';
-import Snackbar from '../snackbar/Snackbar';
-import ProblemsSection from '../problems-section/ProblemsSection';
-import {getRandomProblem} from '../../services/problems';
+import React, { ReactElement, useState } from "react";
+import { Problem } from "../../models/Problem";
+import { ProblemStatistics } from "../../models/ProblemStatistics";
+import Header from "../header/Header";
+import Topics from "../topics/Topics";
+import Snackbar from "../snackbar/Snackbar";
+import ProblemsSection from "../problems-section/ProblemsSection";
+import { getRandomProblem } from "../../services/problems";
 import {
   setProblemsListToStorage,
   clearProblemsList,
-} from '../../services/storage';
-import ClearButton from '../clear-button/ClearButton';
-import Options from '../options/Options';
-import styled from 'styled-components';
-import Footer from '../footer/Footer';
+} from "../../services/storage";
+import ClearButton from "../clear-button/ClearButton";
+import Options from "../options/Options";
+import styled from "styled-components";
+import Footer from "../footer/Footer";
 
 interface Props {
   initialProblemsList: Array<{
@@ -32,11 +32,11 @@ const Container = styled.div`
 `;
 
 const Home: React.FC<Props> = (props: Props): ReactElement => {
-  const [errContent, setErrContent] = useState<string>('');
+  const [errContent, setErrContent] = useState<string>("");
   const [visible, setVisible] = useState<boolean>(false);
   const [selectedTopics, setSelectedTopics] = useState<Array<string>>([]);
   const [problemsList, setProblemsList] = useState<
-    Array<{problem: Problem; problemStatistics: ProblemStatistics}>
+    Array<{ problem: Problem; problemStatistics: ProblemStatistics }>
   >(props.initialProblemsList);
 
   const triggerError: (content: string) => void = (content: string) => {
@@ -47,7 +47,7 @@ const Home: React.FC<Props> = (props: Props): ReactElement => {
   const randomizeProblem: (ratings: {
     min: number;
     max: number;
-  }) => void = async (ratings: {min: number; max: number}): Promise<void> => {
+  }) => void = async (ratings: { min: number; max: number }): Promise<void> => {
     try {
       const newProblem = await getRandomProblem(selectedTopics, ratings);
       const newProblemsList = problemsList.concat(newProblem);
