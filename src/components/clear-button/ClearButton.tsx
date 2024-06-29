@@ -1,6 +1,6 @@
-import React, {ReactElement} from 'react';
-import styled from 'styled-components';
-import Row from '../common/Row';
+import React, { ReactElement } from "react";
+import styled from "styled-components";
+import Row from "../common/Row";
 
 interface Props {
   onClick: Function;
@@ -12,7 +12,7 @@ const StyledButton = styled.div<Props>`
   height: 35px;
   margin: 15px;
   display: flex;
-  visibility: ${(props) => (props.disabled ? 'hidden' : 'none')};
+  visibility: ${(props) => (props.disabled ? "hidden" : "none")};
   justify-content: space-evenly;
   align-items: center;
   background-color: red;
@@ -32,7 +32,6 @@ const StyledButton = styled.div<Props>`
 `;
 
 const ClearButton: React.FC<Props> = (props: Props): ReactElement => {
-  console.log(props.disabled);
   return (
     <Row>
       <StyledButton {...props} onClick={() => props.onClick()}>

@@ -14,6 +14,7 @@ import ClearButton from "../clear-button/ClearButton";
 import Options from "../options/Options";
 import styled from "styled-components";
 import Footer from "../footer/Footer";
+import LogicalOperator from "../../models/LogicalOperator";
 
 interface Props {
   initialProblemsList: Array<{
@@ -35,6 +36,7 @@ const Home: React.FC<Props> = (props: Props): ReactElement => {
   const [errContent, setErrContent] = useState<string>("");
   const [visible, setVisible] = useState<boolean>(false);
   const [selectedTopics, setSelectedTopics] = useState<Array<string>>([]);
+  const [operator, setOperator] = useState<LogicalOperator>("AND");
   const [problemsList, setProblemsList] = useState<
     Array<{ problem: Problem; problemStatistics: ProblemStatistics }>
   >(props.initialProblemsList);
@@ -49,7 +51,11 @@ const Home: React.FC<Props> = (props: Props): ReactElement => {
     max: number;
   }) => void = async (ratings: { min: number; max: number }): Promise<void> => {
     try {
-      const newProblem = await getRandomProblem(selectedTopics, ratings);
+      const newProblem = await getRandomProblem(
+        selectedTopics,
+        ratings,
+        operator,
+      );
       const newProblemsList = problemsList.concat(newProblem);
       setProblemsListToStorage(newProblemsList);
       setProblemsList(newProblemsList);
@@ -70,9 +76,12 @@ const Home: React.FC<Props> = (props: Props): ReactElement => {
       <Topics
         selectedTopics={selectedTopics}
         setSelectedTopics={setSelectedTopics}
-        triggerError={triggerError}
       ></Topics>
-      <Options onRandomize={randomizeProblem}></Options>
+      <Options
+        operator={operator}
+        onOperatorSelect={(value: LogicalOperator) => setOperator(value)}
+        onRandomize={randomizeProblem}
+      ></Options>
       <ProblemsSection problemsList={problemsList}></ProblemsSection>
 
       <ClearButton

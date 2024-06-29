@@ -2,6 +2,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import { Problem } from "../models/Problem";
 import { ProblemStatistics } from "../models/ProblemStatistics";
 import { getTags } from "./data";
+import LogicalOperator from "../models/LogicalOperator";
 
 const baseUrl: string = "https://codeforces.com/api/problemset.problems";
 
@@ -9,37 +10,62 @@ function getRandomInt(max: number): number {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-export async function getRandomProblem(
-  topics: Array<string>,
-  ratings: { min: number; max: number }
-): Promise<{ problem: Problem; problemStatistics: ProblemStatistics }> {
-  if (topics.length === 0)
-    topics = topics.concat(getTags()[getRandomInt(getTags().length)]);
+// codeforces API only allows for AND operations
+// OR operations are implemented manually
+async function getProblems(
+  topics: string[],
+  operator: LogicalOperator,
+): Promise<[Problem[], ProblemStatistics[]]> {
+  let problems: Problem[] = [];
+  let problemsStatistics: ProblemStatistics[] = [];
 
-  const tags: string = topics.reduce(
-    (prev: string, current: string, index: number) => {
-      return prev + ";" + current;
-    }
-  );
+  if (operator === "AND") {
+    const tags: string = topics.reduce(
+      (prev: string, current: string, _: number) => {
+        return prev + ";" + current;
+      },
+    );
 
-  let response: AxiosRequestConfig;
-
-  try {
-    response = await axios.get(baseUrl, {
+    const response = await axios.get(baseUrl, {
       params: {
         tags: tags,
       },
     });
-  } catch (e) {
-    throw new Error("Server error");
+
+    if (response.data.status !== "OK") throw new Error("Invalid combination");
+
+    problems = response.data.result.problems as Array<Problem>;
+    problemsStatistics = response.data.result
+      .problemStatistics as Array<ProblemStatistics>;
+  } else if (operator === "OR") {
+    for (const topic of topics) {
+      const response = await axios.get(baseUrl, {
+        params: {
+          tags: topic,
+        },
+      });
+
+      if (response.data.status !== "OK") throw new Error("Invalid combination");
+
+      problems = problems.concat(response.data.result.problems as Problem);
+      problemsStatistics = problemsStatistics.concat(
+        response.data.result.problemStatistics as ProblemStatistics,
+      );
+    }
   }
 
-  if (response.data.status !== "OK") throw new Error("Invalid combination");
+  return [problems, problemsStatistics];
+}
 
-  const problems: Array<Problem> = response.data.result
-    .problems as Array<Problem>;
-  const problemsStatistics: Array<ProblemStatistics> = response.data.result
-    .problemStatistics as Array<ProblemStatistics>;
+export async function getRandomProblem(
+  topics: Array<string>,
+  ratings: { min: number; max: number },
+  operator: LogicalOperator,
+): Promise<{ problem: Problem; problemStatistics: ProblemStatistics }> {
+  if (topics.length === 0)
+    topics = topics.concat(getTags()[getRandomInt(getTags().length)]);
+
+  const [problems, problemsStatistics] = await getProblems(topics, operator);
 
   let filteredProblems: Array<number> = [];
   problems.forEach((val: Problem, index: number) => {
@@ -51,10 +77,7 @@ export async function getRandomProblem(
 
   if (filteredProblems.length === 0)
     throw new Error(
-      `No problems found for ${tags.replace(
-        /;/g,
-        ","
-      )}. Try another combination.`
+      `No problems found for the entered combination. Try another combination.`,
     );
 
   const probIndex: number =
