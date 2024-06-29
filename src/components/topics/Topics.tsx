@@ -1,13 +1,12 @@
-import React, {ReactElement} from 'react';
-import styled from 'styled-components';
-import Tag from './Tag';
-import {getTags} from '../../services/data';
-import Row from '../common/Row';
+import React, { ReactElement } from "react";
+import styled from "styled-components";
+import Tag from "./Tag";
+import { getTags } from "../../services/data";
+import Row from "../common/Row";
 
 interface Props {
   selectedTopics: Array<string>;
   setSelectedTopics: Function;
-  triggerError: (content: string) => void;
 }
 
 const Container = styled.div`
@@ -23,21 +22,19 @@ const Container = styled.div`
 
 const tags: Array<string> = getTags();
 
-const Topics: React.FC<Props> = (props: Props): ReactElement => {
-  const selectedTopics: Array<string> = props.selectedTopics;
+const Topics: React.FC<Props> = ({
+  selectedTopics,
+  setSelectedTopics,
+}: Props): ReactElement => {
   const handleTopicAddition = (selected: boolean, topic: string) => {
     let newSelectedTopics: Array<string>;
     if (selected) {
       newSelectedTopics = selectedTopics.filter((val: string) => val !== topic);
     } else {
-      if (selectedTopics.length >= 4) {
-        props.triggerError('Maximum of 4 selected topics');
-        return;
-      }
       newSelectedTopics = selectedTopics.concat(topic);
     }
 
-    props.setSelectedTopics(newSelectedTopics);
+    setSelectedTopics(newSelectedTopics);
   };
 
   return (

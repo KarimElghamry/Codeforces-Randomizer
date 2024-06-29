@@ -1,5 +1,5 @@
-import React, {ReactElement} from 'react';
-import styled from 'styled-components';
+import React, { ReactElement } from "react";
+import styled from "styled-components";
 
 interface Props {
   selected: boolean;
@@ -12,7 +12,7 @@ interface StyledProps {
 }
 
 const StyledTag = styled.div<StyledProps>`
-  background-color: ${(props) => (props.selected ? '#33AC71' : '#00bcd4')};
+  background-color: ${(props) => (props.selected ? "#33AC71" : "#00bcd4")};
   border-radius: 2px;
   color: white;
   font-weight: 700;
@@ -36,7 +36,7 @@ const Tag: React.FC<Props> = (props: Props): ReactElement => {
       selected={props.selected}
       onClick={() => props.onClick(selected, content)}
     >
-      <div style={{margin: '5px'}}>{props.content}</div>
+      <div style={{ margin: "5px" }}>{props.content}</div>
     </StyledTag>
   );
 };
