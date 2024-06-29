@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/Codeforces-Randomizer/static/css/main.20789c28.chunk.css",
-    "main.js": "/Codeforces-Randomizer/static/js/main.5c5d4fbd.chunk.js",
-    "main.js.map": "/Codeforces-Randomizer/static/js/main.5c5d4fbd.chunk.js.map",
+    "main.css": "/Codeforces-Randomizer/static/css/main.62cbe0fb.chunk.css",
+    "main.js": "/Codeforces-Randomizer/static/js/main.12ec58fd.chunk.js",
+    "main.js.map": "/Codeforces-Randomizer/static/js/main.12ec58fd.chunk.js.map",
     "runtime-main.js": "/Codeforces-Randomizer/static/js/runtime-main.ce7b7165.js",
     "runtime-main.js.map": "/Codeforces-Randomizer/static/js/runtime-main.ce7b7165.js.map",
-    "static/js/2.494db004.chunk.js": "/Codeforces-Randomizer/static/js/2.494db004.chunk.js",
-    "static/js/2.494db004.chunk.js.map": "/Codeforces-Randomizer/static/js/2.494db004.chunk.js.map",
+    "static/js/2.d7a4019d.chunk.js": "/Codeforces-Randomizer/static/js/2.d7a4019d.chunk.js",
+    "static/js/2.d7a4019d.chunk.js.map": "/Codeforces-Randomizer/static/js/2.d7a4019d.chunk.js.map",
     "index.html": "/Codeforces-Randomizer/index.html",
-    "precache-manifest.e447a942bc9cae680fcd1a420efdaff5.js": "/Codeforces-Randomizer/precache-manifest.e447a942bc9cae680fcd1a420efdaff5.js",
+    "precache-manifest.d7081cfb0dd9d3f13b66ab6e15a36ed2.js": "/Codeforces-Randomizer/precache-manifest.d7081cfb0dd9d3f13b66ab6e15a36ed2.js",
     "service-worker.js": "/Codeforces-Randomizer/service-worker.js",
-    "static/css/main.20789c28.chunk.css.map": "/Codeforces-Randomizer/static/css/main.20789c28.chunk.css.map",
-    "static/js/2.494db004.chunk.js.LICENSE.txt": "/Codeforces-Randomizer/static/js/2.494db004.chunk.js.LICENSE.txt",
+    "static/css/main.62cbe0fb.chunk.css.map": "/Codeforces-Randomizer/static/css/main.62cbe0fb.chunk.css.map",
+    "static/js/2.d7a4019d.chunk.js.LICENSE.txt": "/Codeforces-Randomizer/static/js/2.d7a4019d.chunk.js.LICENSE.txt",
     "static/media/index.css": "/Codeforces-Randomizer/static/media/Kanit.a82c4c3b.ttf",
     "static/media/codeforces_logo.png": "/Codeforces-Randomizer/static/media/codeforces_logo.0113e4ab.png",
     "static/media/gh-logo.png": "/Codeforces-Randomizer/static/media/gh-logo.89c2c067.png",
-    "static/media/loop.f2ee10e1.svg": "/Codeforces-Randomizer/static/media/loop.f2ee10e1.svg"
+    "static/media/loop.43e3c67e.svg": "/Codeforces-Randomizer/static/media/loop.43e3c67e.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.ce7b7165.js",
-    "static/js/2.494db004.chunk.js",
-    "static/css/main.20789c28.chunk.css",
-    "static/js/main.5c5d4fbd.chunk.js"
+    "static/js/2.d7a4019d.chunk.js",
+    "static/css/main.62cbe0fb.chunk.css",
+    "static/js/main.12ec58fd.chunk.js"
   ]
 }

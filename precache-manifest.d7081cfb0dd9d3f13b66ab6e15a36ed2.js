@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "124c1546eadbdb95c5d1e9ce559710f8",
+    "revision": "0125da228a0f2464be7410379ea83905",
     "url": "/Codeforces-Randomizer/index.html"
   },
   {
-    "revision": "75d04b23d27125d76dcf",
-    "url": "/Codeforces-Randomizer/static/css/main.20789c28.chunk.css"
+    "revision": "51c79d53832554c99050",
+    "url": "/Codeforces-Randomizer/static/css/main.62cbe0fb.chunk.css"
   },
   {
-    "revision": "e96897e73ec2ca43ec4f",
-    "url": "/Codeforces-Randomizer/static/js/2.494db004.chunk.js"
+    "revision": "79b551f9f8dea1c5c5a3",
+    "url": "/Codeforces-Randomizer/static/js/2.d7a4019d.chunk.js"
   },
   {
     "revision": "c64c486544348f10a6d6c716950bc223",
-    "url": "/Codeforces-Randomizer/static/js/2.494db004.chunk.js.LICENSE.txt"
+    "url": "/Codeforces-Randomizer/static/js/2.d7a4019d.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "75d04b23d27125d76dcf",
-    "url": "/Codeforces-Randomizer/static/js/main.5c5d4fbd.chunk.js"
+    "revision": "51c79d53832554c99050",
+    "url": "/Codeforces-Randomizer/static/js/main.12ec58fd.chunk.js"
   },
   {
     "revision": "7acaf484242d4bd873b3",
@@ -36,7 +36,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Codeforces-Randomizer/static/media/gh-logo.89c2c067.png"
   },
   {
-    "revision": "f2ee10e194f38e0e1dd3575ca760e5db",
-    "url": "/Codeforces-Randomizer/static/media/loop.f2ee10e1.svg"
+    "revision": "43e3c67e054561d7687a03b98fcf3170",
+    "url": "/Codeforces-Randomizer/static/media/loop.43e3c67e.svg"
   }
 ]);
