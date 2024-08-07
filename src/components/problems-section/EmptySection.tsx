@@ -14,7 +14,8 @@ const EmptySection: React.FC<{}> = (): ReactElement => {
   return (
     <StyledEmptySecion>
       <div>Choose topics and press Randomize</div>
-      <div>to start adding problems</div>
+      <div>to start adding problems.</div>
+      <div>Type your handle to filter solved problems</div>
     </StyledEmptySecion>
   );
 };

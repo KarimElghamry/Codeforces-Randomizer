@@ -6,12 +6,16 @@ import styled from "styled-components";
 import LogicalOperator from "../../models/LogicalOperator";
 import OptionsButton from "../options-button";
 import Row from "../common/Row";
+import TextInput from "../TextInput/TextInput";
 
 interface Props {
-  onRandomize: Function;
+  onRandomize: (ratings: { min: number; max: number }, handle: string) => Promise<void>; // Updated to include handle
   onOperatorSelect: (operator: LogicalOperator) => void;
   operator: LogicalOperator;
+  handle: string;
+  setHandle: (handle: string) => void;
 }
+
 
 const Container = styled.div`
   display: flex;
@@ -27,13 +31,17 @@ const Options: React.FC<Props> = (props: Props): ReactElement => {
     min: minRating,
     max: maxRating,
   });
+  const [handle, setHandle] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const randomizeProblem = async () => {
     setIsLoading(true);
-    await props.onRandomize(rating);
+    await props.onRandomize(rating, handle);
     setIsLoading(false);
   };
+
+  
+
   return (
     <Container>
       <Row>
@@ -50,6 +58,12 @@ const Options: React.FC<Props> = (props: Props): ReactElement => {
         maxRating={rating.max}
         onChange={setRating}
       ></Slider>
+
+      <TextInput
+        value={handle}
+        onChange={setHandle}
+      ></TextInput>
+
       <RandomizeButton
         isLoading={isLoading}
         onClick={randomizeProblem}
