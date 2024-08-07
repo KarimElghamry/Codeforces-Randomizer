@@ -15,6 +15,7 @@ import Options from "../options/Options";
 import styled from "styled-components";
 import Footer from "../footer/Footer";
 import LogicalOperator from "../../models/LogicalOperator";
+import TextInput from '../TextInput/TextInput';
 
 interface Props {
   initialProblemsList: Array<{
@@ -35,6 +36,7 @@ const Container = styled.div`
 const Home: React.FC<Props> = (props: Props): ReactElement => {
   const [errContent, setErrContent] = useState<string>("");
   const [visible, setVisible] = useState<boolean>(false);
+  const [handle, setHandle] = useState<string>("");
   const [selectedTopics, setSelectedTopics] = useState<Array<string>>([]);
   const [operator, setOperator] = useState<LogicalOperator>("AND");
   const [problemsList, setProblemsList] = useState<
@@ -46,15 +48,13 @@ const Home: React.FC<Props> = (props: Props): ReactElement => {
     setVisible(true);
   };
 
-  const randomizeProblem: (ratings: {
-    min: number;
-    max: number;
-  }) => void = async (ratings: { min: number; max: number }): Promise<void> => {
+  const randomizeProblem = async (ratings: { min: number; max: number }, handle: string): Promise<void> => {
     try {
       const newProblem = await getRandomProblem(
         selectedTopics,
         ratings,
         operator,
+        handle,
       );
       const newProblemsList = problemsList.concat(newProblem);
       setProblemsListToStorage(newProblemsList);
@@ -81,9 +81,10 @@ const Home: React.FC<Props> = (props: Props): ReactElement => {
         operator={operator}
         onOperatorSelect={(value: LogicalOperator) => setOperator(value)}
         onRandomize={randomizeProblem}
+        handle={handle}          // Pass handle to Options
+        setHandle={setHandle}    // Pass setHandle to Options
       ></Options>
       <ProblemsSection problemsList={problemsList}></ProblemsSection>
-
       <ClearButton
         onClick={clearProblemsHistory}
         disabled={problemsList.length === 0}

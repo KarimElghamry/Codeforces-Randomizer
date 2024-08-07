@@ -10,11 +10,53 @@ function getRandomInt(max: number): number {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
+async function getFilteredProblems(handle: string, problems: Problem[], problemsStatistics: ProblemStatistics[]): Promise<[Problem[], ProblemStatistics[]]> {
+  let finalProblems: Problem[] = [];
+  let finalProblemsStatistics: ProblemStatistics[] = [];
+
+    const url = `https://codeforces.com/api/user.status?handle=${handle}`;
+    
+    try {
+      const response = await axios.get(url);
+
+      if (response.data.status !== "OK") {
+        throw new Error("Invalid handle");
+      }
+
+      let solvedProblems: Set<Problem> = new Set();
+      for (const submission of response.data.result) {
+        if (submission.verdict === "OK") {
+          const problem = submission.problem;
+          solvedProblems.add(problem);
+        }
+      }
+
+      problems.forEach((problem: Problem, index: number) => {
+        if (!solvedProblems.has(problem)) {
+          finalProblems.push(problem);
+          finalProblemsStatistics.push(problemsStatistics[index]);
+        }
+      });
+
+    } catch (error) {
+      // Check if the error is an Axios error
+      if (error.response && error.response.status === 400) {
+        throw new Error(`handle: User with handle ${handle} not found`);
+      } else {
+        throw error;
+      }
+    }
+  return [finalProblems, finalProblemsStatistics];
+
+}
+
+
 // codeforces API only allows for AND operations
 // OR operations are implemented manually
 async function getProblems(
   topics: string[],
   operator: LogicalOperator,
+  handle: string
 ): Promise<[Problem[], ProblemStatistics[]]> {
   let problems: Problem[] = [];
   let problemsStatistics: ProblemStatistics[] = [];
@@ -54,18 +96,24 @@ async function getProblems(
     }
   }
 
+  
+  if (handle.trim() !== "") {
+    return getFilteredProblems(handle, problems, problemsStatistics);
+  }
   return [problems, problemsStatistics];
+
 }
 
 export async function getRandomProblem(
   topics: Array<string>,
   ratings: { min: number; max: number },
   operator: LogicalOperator,
+  handle: string,
 ): Promise<{ problem: Problem; problemStatistics: ProblemStatistics }> {
   if (topics.length === 0)
     topics = topics.concat(getTags()[getRandomInt(getTags().length)]);
 
-  const [problems, problemsStatistics] = await getProblems(topics, operator);
+  const [problems, problemsStatistics] = await getProblems(topics, operator, handle);
 
   let filteredProblems: Array<number> = [];
   problems.forEach((val: Problem, index: number) => {
