@@ -14,38 +14,38 @@ async function getFilteredProblems(handle: string, problems: Problem[], problems
   let finalProblems: Problem[] = [];
   let finalProblemsStatistics: ProblemStatistics[] = [];
 
-    const url = `https://codeforces.com/api/user.status?handle=${handle}`;
-    
-    try {
-      const response = await axios.get(url);
+  const url = `https://codeforces.com/api/user.status?handle=${handle}`;
 
-      if (response.data.status !== "OK") {
-        throw new Error("Invalid handle");
-      }
+  try {
+    const response = await axios.get(url);
 
-      let solvedProblems: Set<string> = new Set();
-      for (const submission of response.data.result) {
-        if (submission.verdict === "OK") {
-          solvedProblems.add(`${submission.problem.contestId}${submission.problem.index}`);
-        }
-      }
+    if (response.data.status !== "OK") {
+      throw new Error("Invalid handle");
+    }
 
-
-      problems.forEach((problem: Problem, index: number) => {
-        if (!solvedProblems.has(`${problem.contestId}${problem.index}`)) {
-          finalProblems.push(problem);
-          finalProblemsStatistics.push(problemsStatistics[index]);
-        }
-      });
-
-    } catch (error) {
-      // Check if the error is an Axios error
-      if (error.response && error.response.status === 400) {
-        throw new Error(`handle: User with handle ${handle} not found`);
-      } else {
-        throw error;
+    let solvedProblems: Set<string> = new Set();
+    for (const submission of response.data.result) {
+      if (submission.verdict === "OK") {
+        solvedProblems.add(`${submission.problem.contestId}${submission.problem.index}`);
       }
     }
+
+
+    problems.forEach((problem: Problem, index: number) => {
+      if (!solvedProblems.has(`${problem.contestId}${problem.index}`)) {
+        finalProblems.push(problem);
+        finalProblemsStatistics.push(problemsStatistics[index]);
+      }
+    });
+
+  } catch (error) {
+    // Check if the error is an Axios error
+    if (error.response && error.response.status === 400) {
+      throw new Error(`handle: User with handle ${handle} not found`);
+    } else {
+      throw error;
+    }
+  }
   return [finalProblems, finalProblemsStatistics];
 
 }
@@ -56,7 +56,6 @@ async function getFilteredProblems(handle: string, problems: Problem[], problems
 async function getProblems(
   topics: string[],
   operator: LogicalOperator,
-  handle: string
 ): Promise<[Problem[], ProblemStatistics[]]> {
   let problems: Problem[] = [];
   let problemsStatistics: ProblemStatistics[] = [];
@@ -96,10 +95,8 @@ async function getProblems(
     }
   }
 
-  
-  if (handle.trim() !== "") {
-    return getFilteredProblems(handle, problems, problemsStatistics);
-  }
+
+
   return [problems, problemsStatistics];
 
 }
@@ -113,25 +110,45 @@ export async function getRandomProblem(
   if (topics.length === 0)
     topics = topics.concat(getTags()[getRandomInt(getTags().length)]);
 
-  const [problems, problemsStatistics] = await getProblems(topics, operator, handle);
+  const [problems, problemsStatistics] = await getProblems(topics, operator);
+
+  if (problems.length === 0) {
+    throw new Error(
+      `No problems found for the entered topics. Try another combination.`,
+    );
+  }
+
+  const [finalProblems, finalProblemsStatistics] = handle.trim().length > 0 
+  ? await getFilteredProblems(handle, problems, problemsStatistics) 
+  : [problems, problemsStatistics];
+
+  if(finalProblems.length === 0) {
+    throw new Error(`You solved all the problems in the entered topics. Try another combination.`);
+  }
+
+
 
   let filteredProblems: Array<number> = [];
-  problems.forEach((val: Problem, index: number) => {
+  finalProblems.forEach((val: Problem, index: number) => {
     if (!val.rating) val.rating = ratings.min;
 
     if (val.rating >= ratings.min && val.rating <= ratings.max)
       filteredProblems = filteredProblems.concat(index);
   });
 
-  if (filteredProblems.length === 0)
+
+
+  if (filteredProblems.length === 0) {
     throw new Error(
-      `No problems found for the entered combination. Try another combination.`,
+      `No problems found in the specified rating range, or all have been solved. Try another range.`,
     );
+  }
+
 
   const probIndex: number =
     filteredProblems[getRandomInt(filteredProblems.length)];
   return {
-    problem: problems[probIndex],
-    problemStatistics: problemsStatistics[probIndex],
+    problem: finalProblems[probIndex],
+    problemStatistics: finalProblemsStatistics[probIndex],
   };
 }

@@ -96,7 +96,7 @@ const Home: React.FC<Props> = (props: Props): ReactElement => {
         type="error"
         content={errContent}
         visible={visible}
-        timeout={2000}
+        timeout={5000}
         onCancel={() => setVisible(false)}
       ></Snackbar>
     </Container>
