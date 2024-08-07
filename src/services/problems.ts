@@ -23,16 +23,16 @@ async function getFilteredProblems(handle: string, problems: Problem[], problems
         throw new Error("Invalid handle");
       }
 
-      let solvedProblems: Set<Problem> = new Set();
+      let solvedProblems: Set<string> = new Set();
       for (const submission of response.data.result) {
         if (submission.verdict === "OK") {
-          const problem = submission.problem;
-          solvedProblems.add(problem);
+          solvedProblems.add(`${submission.problem.contestId}${submission.problem.index}`);
         }
       }
 
+
       problems.forEach((problem: Problem, index: number) => {
-        if (!solvedProblems.has(problem)) {
+        if (!solvedProblems.has(`${problem.contestId}${problem.index}`)) {
           finalProblems.push(problem);
           finalProblemsStatistics.push(problemsStatistics[index]);
         }
