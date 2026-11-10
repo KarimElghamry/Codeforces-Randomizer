@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0125da228a0f2464be7410379ea83905",
+    "revision": "775317841ac7963a50b65cbe6f43beb3",
     "url": "/Codeforces-Randomizer/index.html"
   },
   {
-    "revision": "51c79d53832554c99050",
+    "revision": "755e8ea2ca816f753daa",
     "url": "/Codeforces-Randomizer/static/css/main.62cbe0fb.chunk.css"
   },
   {
-    "revision": "79b551f9f8dea1c5c5a3",
-    "url": "/Codeforces-Randomizer/static/js/2.d7a4019d.chunk.js"
+    "revision": "46a45c4f40167ad616ca",
+    "url": "/Codeforces-Randomizer/static/js/2.51ed438e.chunk.js"
   },
   {
     "revision": "c64c486544348f10a6d6c716950bc223",
-    "url": "/Codeforces-Randomizer/static/js/2.d7a4019d.chunk.js.LICENSE.txt"
+    "url": "/Codeforces-Randomizer/static/js/2.51ed438e.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "51c79d53832554c99050",
-    "url": "/Codeforces-Randomizer/static/js/main.12ec58fd.chunk.js"
+    "revision": "755e8ea2ca816f753daa",
+    "url": "/Codeforces-Randomizer/static/js/main.efdaad92.chunk.js"
   },
   {
     "revision": "7acaf484242d4bd873b3",
