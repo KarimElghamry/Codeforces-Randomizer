@@ -1,19 +1,23 @@
-import React, {ReactElement, useEffect} from 'react';
-import ProblemCard from './ProblemCard';
-import {ProblemStatistics} from '../../models/ProblemStatistics';
-import {Problem} from '../../models/Problem';
-import styled from 'styled-components';
-import EmptySection from './EmptySection';
-import Row from '../common/Row';
+import React, { ReactElement, useEffect } from "react";
+import ProblemCard from "./ProblemCard";
+import { ProblemStatistics } from "../../models/ProblemStatistics";
+import { Problem } from "../../models/Problem";
+import styled from "styled-components";
+import EmptySection from "./EmptySection";
+import Row from "../common/Row";
 
 interface Props {
-  problemsList: Array<{problem: Problem; problemStatistics: ProblemStatistics}>;
+  problemsList: Array<{
+    problem: Problem;
+    problemStatistics: ProblemStatistics;
+  }>;
+  onProblemDelete: (problem: Problem) => void;
 }
 
 const StyleProblemsSection = styled.div`
   margin-top: 20px;
   height: 300px;
-  width: 500px;
+  width: 40%;
   overflow-y: scroll;
   scrollbar-color: lightgray white;
   scrollbar-width: thin;
@@ -59,6 +63,7 @@ const ProblemsSection: React.FC<Props> = (props: Props): ReactElement => {
                   key={index}
                   problem={val.problem}
                   problemStatistics={val.problemStatistics}
+                  onDelete={props.onProblemDelete}
                 ></ProblemCard>
               );
             })

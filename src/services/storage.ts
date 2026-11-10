@@ -1,11 +1,11 @@
-import {Problem} from '../models/Problem';
-import {ProblemStatistics} from '../models/ProblemStatistics';
+import { Problem } from "../models/Problem";
+import { ProblemStatistics } from "../models/ProblemStatistics";
 
 export function getPromblemsListFromStorage(): Array<{
   problem: Problem;
   problemStatistics: ProblemStatistics;
 }> {
-  const result: string | null = localStorage.getItem('problemsList');
+  const result: string | null = localStorage.getItem("problemsList");
   if (!result) return [];
 
   const problemsList: Array<{
@@ -16,15 +16,23 @@ export function getPromblemsListFromStorage(): Array<{
 }
 
 export function setProblemsListToStorage(
-  list: Array<{problem: Problem; problemStatistics: ProblemStatistics}>
+  list: Array<{ problem: Problem; problemStatistics: ProblemStatistics }>,
 ) {
   const storageObject = {
     problemsList: list,
   };
 
-  localStorage.setItem('problemsList', JSON.stringify(storageObject));
+  localStorage.setItem("problemsList", JSON.stringify(storageObject));
+}
+
+export function deleteProblemFromStorage(problem: Problem) {
+  const problems = getPromblemsListFromStorage().filter(
+    (v) => v.problem.index !== problem.index,
+  );
+
+  setProblemsListToStorage(problems);
 }
 
 export function clearProblemsList(): void {
-  localStorage.setItem('problemsList', JSON.stringify({problemsList: []}));
+  localStorage.setItem("problemsList", JSON.stringify({ problemsList: [] }));
 }

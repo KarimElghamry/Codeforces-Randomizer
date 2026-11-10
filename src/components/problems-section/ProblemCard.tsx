@@ -1,12 +1,14 @@
-import React, {ReactElement} from 'react';
-import styled, {keyframes} from 'styled-components';
-import {Problem} from '../../models/Problem';
-import {ProblemStatistics} from '../../models/ProblemStatistics';
-import {images} from '../../assets';
+import React, { ReactElement } from "react";
+import styled, { keyframes } from "styled-components";
+import { Problem } from "../../models/Problem";
+import { ProblemStatistics } from "../../models/ProblemStatistics";
+import { images } from "../../assets";
+import { deleteProblemFromStorage } from "../../services/storage";
 
 interface CardProps {
   problem: Problem;
   problemStatistics: ProblemStatistics;
+  onDelete: (problem: Problem) => void;
 }
 
 interface CellProps {
@@ -51,11 +53,12 @@ const Cell = styled.div<CellProps>`
 const ProblemCard: React.FC<CardProps> = (props: CardProps): ReactElement => {
   const problem: Problem = props.problem;
   const problemStats: ProblemStatistics = props.problemStatistics;
-  const baseUrl: string = 'https://codeforces.com/problemset/problem';
+  const baseUrl: string = "https://codeforces.com/problemset/problem";
 
   const handleUrlRedirect = () => {
+    // TODO: pass to props
     const redirectUrl: string = `${baseUrl}/${problem.contestId}/${problem.index}`;
-    window.open(redirectUrl, '_blank');
+    window.open(redirectUrl, "_blank");
   };
 
   return (
@@ -65,13 +68,22 @@ const ProblemCard: React.FC<CardProps> = (props: CardProps): ReactElement => {
       }}
     >
       <Cell flex={1}>{`${problemStats.contestId}${problemStats.index}`}</Cell>
-      <Cell flex={2}>{`${problem.name}`}</Cell>
+      <Cell flex={3}>{`${problem.name}`}</Cell>
       <Cell flex={1}>{`${
         problem.rating === undefined ? 0 : problem.rating
       }`}</Cell>
       <Cell flex={1}>
         <img src={images.userIcon} alt=""></img>
         <span>{`x${problemStats.solvedCount}`}</span>
+      </Cell>
+      <Cell
+        flex={1}
+        onClick={(e) => {
+          props.onDelete(props.problem);
+          e.stopPropagation();
+        }}
+      >
+        <img src={images.deleteIcon} alt="" width="20"></img>
       </Cell>
     </StyledProblemCard>
   );
