@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Codeforces-Randomizer/static/css/main.62cbe0fb.chunk.css",
-    "main.js": "/Codeforces-Randomizer/static/js/main.efdaad92.chunk.js",
-    "main.js.map": "/Codeforces-Randomizer/static/js/main.efdaad92.chunk.js.map",
+    "main.js": "/Codeforces-Randomizer/static/js/main.b7b3c924.chunk.js",
+    "main.js.map": "/Codeforces-Randomizer/static/js/main.b7b3c924.chunk.js.map",
     "runtime-main.js": "/Codeforces-Randomizer/static/js/runtime-main.ce7b7165.js",
     "runtime-main.js.map": "/Codeforces-Randomizer/static/js/runtime-main.ce7b7165.js.map",
     "static/js/2.51ed438e.chunk.js": "/Codeforces-Randomizer/static/js/2.51ed438e.chunk.js",
     "static/js/2.51ed438e.chunk.js.map": "/Codeforces-Randomizer/static/js/2.51ed438e.chunk.js.map",
     "index.html": "/Codeforces-Randomizer/index.html",
-    "precache-manifest.2aa512e768355d38d45d7800b4a98a83.js": "/Codeforces-Randomizer/precache-manifest.2aa512e768355d38d45d7800b4a98a83.js",
+    "precache-manifest.66cddb29b29f49a1d1c078fcafac0f6a.js": "/Codeforces-Randomizer/precache-manifest.66cddb29b29f49a1d1c078fcafac0f6a.js",
     "service-worker.js": "/Codeforces-Randomizer/service-worker.js",
     "static/css/main.62cbe0fb.chunk.css.map": "/Codeforces-Randomizer/static/css/main.62cbe0fb.chunk.css.map",
     "static/js/2.51ed438e.chunk.js.LICENSE.txt": "/Codeforces-Randomizer/static/js/2.51ed438e.chunk.js.LICENSE.txt",
@@ -21,6 +21,6 @@
     "static/js/runtime-main.ce7b7165.js",
     "static/js/2.51ed438e.chunk.js",
     "static/css/main.62cbe0fb.chunk.css",
-    "static/js/main.efdaad92.chunk.js"
+    "static/js/main.b7b3c924.chunk.js"
   ]
 }
