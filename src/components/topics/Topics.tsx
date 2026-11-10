@@ -6,7 +6,7 @@ import Row from "../common/Row";
 
 interface Props {
   selectedTopics: Array<string>;
-  setSelectedTopics: Function;
+  setSelectedTopics: (topics: string[]) => void;
 }
 
 const Container = styled.div`

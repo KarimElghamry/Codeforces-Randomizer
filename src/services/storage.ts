@@ -1,6 +1,11 @@
 import { Problem } from "../models/Problem";
 import { ProblemStatistics } from "../models/ProblemStatistics";
+import { minRating, maxRating } from "./data";
+import Ratings from "../models/Ratings";
 
+// TODO: refactor to module/class
+
+// Problems
 export function getPromblemsListFromStorage(): Array<{
   problem: Problem;
   problemStatistics: ProblemStatistics;
@@ -17,7 +22,7 @@ export function getPromblemsListFromStorage(): Array<{
 
 export function setProblemsListToStorage(
   list: Array<{ problem: Problem; problemStatistics: ProblemStatistics }>,
-) {
+): void {
   const storageObject = {
     problemsList: list,
   };
@@ -25,7 +30,7 @@ export function setProblemsListToStorage(
   localStorage.setItem("problemsList", JSON.stringify(storageObject));
 }
 
-export function deleteProblemFromStorage(problem: Problem) {
+export function deleteProblemFromStorage(problem: Problem): void {
   const problems = getPromblemsListFromStorage().filter(
     (v) => v.problem.index !== problem.index,
   );
@@ -35,4 +40,17 @@ export function deleteProblemFromStorage(problem: Problem) {
 
 export function clearProblemsList(): void {
   localStorage.setItem("problemsList", JSON.stringify({ problemsList: [] }));
+}
+
+// ratings
+export function getRatingsFromStorage(): Ratings {
+  const result: string | null = localStorage.getItem("ratings");
+  if (!result) return { min: minRating, max: maxRating };
+
+  const ratings = JSON.parse(result) as Ratings;
+  return ratings;
+}
+
+export function setRatingsToStorage(ratings: Ratings): void {
+  localStorage.setItem("ratings", JSON.stringify(ratings));
 }

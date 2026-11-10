@@ -1,11 +1,15 @@
 import React, { ReactElement, useState } from "react";
 import Slider from "../slider/Slider";
-import { minRating, maxRating } from "../../services/data";
 import RandomizeButton from "../randomize-button/RandomizeButton";
 import styled from "styled-components";
 import LogicalOperator from "../../models/LogicalOperator";
 import OptionsButton from "../options-button";
 import Row from "../common/Row";
+import Ratings from "../../models/Ratings";
+import {
+  getRatingsFromStorage,
+  setRatingsToStorage,
+} from "../../services/storage";
 
 interface Props {
   onRandomize: Function;
@@ -23,16 +27,18 @@ const Container = styled.div`
 const operators: LogicalOperator[] = ["AND", "OR"];
 
 const Options: React.FC<Props> = (props: Props): ReactElement => {
-  const [rating, setRating] = useState<{ min: number; max: number }>({
-    min: minRating,
-    max: maxRating,
-  });
+  const [ratings, setRatings] = useState<Ratings>(getRatingsFromStorage());
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const randomizeProblem = async () => {
     setIsLoading(true);
-    await props.onRandomize(rating);
+    await props.onRandomize(ratings);
     setIsLoading(false);
+  };
+
+  const handleRatingsChange = (ratings: Ratings) => {
+    setRatingsToStorage(ratings);
+    setRatings(ratings);
   };
   return (
     <Container>
@@ -46,9 +52,9 @@ const Options: React.FC<Props> = (props: Props): ReactElement => {
         ))}
       </Row>
       <Slider
-        minRating={rating.min}
-        maxRating={rating.max}
-        onChange={setRating}
+        minRating={ratings.min}
+        maxRating={ratings.max}
+        onChange={handleRatingsChange}
       ></Slider>
       <RandomizeButton
         isLoading={isLoading}
