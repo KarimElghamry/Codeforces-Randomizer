@@ -9,6 +9,8 @@ import { getRandomProblem } from "../../services/problems";
 import {
   setProblemsListToStorage,
   clearProblemsList,
+  deleteProblemFromStorage,
+  getPromblemsListFromStorage,
 } from "../../services/storage";
 import ClearButton from "../clear-button/ClearButton";
 import Options from "../options/Options";
@@ -82,7 +84,13 @@ const Home: React.FC<Props> = (props: Props): ReactElement => {
         onOperatorSelect={(value: LogicalOperator) => setOperator(value)}
         onRandomize={randomizeProblem}
       ></Options>
-      <ProblemsSection problemsList={problemsList}></ProblemsSection>
+      <ProblemsSection
+        problemsList={problemsList}
+        onProblemDelete={(problem: Problem) => {
+          deleteProblemFromStorage(problem);
+          setProblemsList(getPromblemsListFromStorage());
+        }}
+      ></ProblemsSection>
 
       <ClearButton
         onClick={clearProblemsHistory}
