@@ -1,7 +1,8 @@
-import React, {ReactElement} from 'react';
-import {Range, getTrackBackground} from 'react-range';
-import styled from 'styled-components';
-import {minRating, maxRating} from '../../services/data';
+import React, { ReactElement } from "react";
+import { Range, getTrackBackground } from "react-range";
+import styled from "styled-components";
+import { minRating, maxRating } from "../../services/data";
+import Ratings from "../../models/Ratings";
 
 interface TrackProps {
   values: Array<number>;
@@ -12,7 +13,7 @@ interface TrackProps {
 interface SliderProps {
   minRating: number;
   maxRating: number;
-  onChange: Function;
+  onChange: (ratings: Ratings) => void;
 }
 
 const Container = styled.div`
@@ -28,7 +29,7 @@ const Track = styled.div<TrackProps>`
   background: ${(props) =>
     getTrackBackground({
       values: props.values,
-      colors: ['#ccc', '#198FCE', '#ccc'],
+      colors: ["#ccc", "#198FCE", "#ccc"],
       min: props.min,
       max: props.max,
     })};
@@ -37,21 +38,21 @@ const Track = styled.div<TrackProps>`
   margin-bottom: 10px;
 `;
 
-const Thumb = styled.div<{index: number}>`
+const Thumb = styled.div<{ index: number }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => (props.index === 0 ? '#F8CC52' : '#BA1D25')};
+  background-color: ${(props) => (props.index === 0 ? "#F8CC52" : "#BA1D25")};
   height: 16px;
   width: 16px;
   border-radius: 16px;
 `;
 
-const Indicator = styled.div<{isDragged: boolean}>`
+const Indicator = styled.div<{ isDragged: boolean }>`
   height: 8px;
   width: 8px;
   border-radius: 6px;
-  background-color: ${(props) => (props.isDragged ? '#198FCE' : 'white')};
+  background-color: ${(props) => (props.isDragged ? "#198FCE" : "white")};
 `;
 
 const Slider: React.FC<SliderProps> = (props: SliderProps): ReactElement => {
@@ -63,13 +64,15 @@ const Slider: React.FC<SliderProps> = (props: SliderProps): ReactElement => {
         min={minRating}
         max={maxRating}
         values={values}
-        onChange={(values) => props.onChange({min: values[0], max: values[1]})}
-        renderTrack={({props, children}) => (
+        onChange={(values) =>
+          props.onChange({ min: values[0], max: values[1] })
+        }
+        renderTrack={({ props, children }) => (
           <Track min={minRating} max={maxRating} values={values} {...props}>
             {children}
           </Track>
         )}
-        renderThumb={({props, isDragged, index}) => {
+        renderThumb={({ props, isDragged, index }) => {
           return (
             <Thumb {...props} index={index}>
               <Indicator isDragged={isDragged}></Indicator>
